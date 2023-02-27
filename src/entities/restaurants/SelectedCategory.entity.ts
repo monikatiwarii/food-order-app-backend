@@ -4,7 +4,7 @@ import {Entity,BaseEntity,PrimaryColumn,Column} from 'typeorm'
 
 export class SelectedCategory extends BaseEntity{
 
-    @Column()
+    @PrimaryColumn()
     id : string;
 
     @Column()

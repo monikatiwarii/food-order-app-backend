@@ -20,7 +20,7 @@ export class FoodItem extends BaseEntity {
     image : string;
 
     @Column()
-    tags : string[];
+    tags : string;
     
     @Column()
     quantity : number;

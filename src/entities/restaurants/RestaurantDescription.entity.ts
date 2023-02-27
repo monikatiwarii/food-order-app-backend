@@ -1,9 +1,9 @@
-import {Entity,BaseEntity,Column} from 'typeorm'
+import {Entity,BaseEntity,Column, PrimaryGeneratedColumn} from 'typeorm'
 
 @Entity('RestaurantDescription')
 
 export class RestaurantDescription extends BaseEntity{
-    @Column()
+    @PrimaryGeneratedColumn()
     id : number;
 
     @Column()
