@@ -1,15 +1,15 @@
 require('dotenv').config()
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import {Restaurants} from '../entities/restaurants/Restaurants.entity'
-import { Category } from '../entities/restaurants/Category.entity'
-import { RestaurantDescription } from '../entities/restaurants/RestaurantDescription.entity'
-import { FoodItem } from '../entities/restaurants/FoodItem.entity'
-import { FoodCollection } from '../entities/foods/FoodCollection.entity'
-import { FoodList } from '../entities/foods/FoodList.entity'
-import { SelectedCategory } from '../entities/restaurants/SelectedCategory.entity'
-import { TrandingFood } from '../entities/foods/TrandingFood.entity'
-import {Login} from '../entities/login/Login.entity'
+import {restaurants} from '../entities/restaurants/restaurants.entity'
+import { category } from '../entities/restaurants/category.entity'
+import { restaurantDescription } from '../entities/restaurants/restaurantDescription.entity'
+import { foodItem } from '../entities/restaurants/foodItem.entity'
+import { foodCollection } from '../entities/foods/foodCollection.entity'
+import { foodList } from '../entities/foods/foodList.entity'
+import { selectedCategory } from '../entities/restaurants/selectedCategory.entity'
+import { trandingFood } from '../entities/foods/trandingFood.entity'
+import {login} from '../entities/login/Login.entity'
 
 
 type configType = {
@@ -21,11 +21,16 @@ type configType = {
 }
 
 const postgresConfig : configType = {
+    // host : process.env.POSTGRES_HOST || 'localhost',
+    // port : parseInt( process.env.POSTGRES_PORT) || 5432,
+    // username : process.env.POSTGRES_USERNAME || 'postgres',
+    // password : process.env.POSTGRES_PASSWORD || '1234',
+    // database : process.env.POSTGRES_DATABASE || 'foodorder'
     host : 'localhost',
     port : 5432,
     username : 'postgres',
     password : '1234',
-    database : 'foodorder'
+    database:'foodorder'
 }
 
 export const AppDataSource = new DataSource({
@@ -33,7 +38,7 @@ export const AppDataSource = new DataSource({
     type : 'postgres',
     synchronize : true,
     logging : false,
-    entities : [Restaurants,Category,RestaurantDescription,FoodItem,FoodCollection,FoodList,SelectedCategory,TrandingFood,Login],
+    entities : [restaurants,category,restaurantDescription,foodItem,foodCollection,foodList,selectedCategory,trandingFood,login],
    
 })
 

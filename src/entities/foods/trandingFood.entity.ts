@@ -1,10 +1,10 @@
-import {Entity,BaseEntity,Column,PrimaryColumn } from 'typeorm'
+import {Entity,BaseEntity,Column,PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('trandingFood')
 
-export class TrandingFood extends BaseEntity{
+export class trandingFood extends BaseEntity{
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id  : number;
 
     @Column()

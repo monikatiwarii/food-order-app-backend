@@ -1,9 +1,9 @@
-import { Entity,BaseEntity,Column,PrimaryColumn } from "typeorm";
+import { Entity,BaseEntity,Column,PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('login')
 
-export class Login extends BaseEntity{
-    @PrimaryColumn()
+export class login extends BaseEntity{
+    @PrimaryGeneratedColumn()
     id : number
 
     @Column({

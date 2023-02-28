@@ -2,7 +2,7 @@ import {Entity,BaseEntity,Column, PrimaryGeneratedColumn} from 'typeorm'
 
 @Entity('RestaurantDescription')
 
-export class RestaurantDescription extends BaseEntity{
+export class restaurantDescription extends BaseEntity{
     @PrimaryGeneratedColumn()
     id : number;
 

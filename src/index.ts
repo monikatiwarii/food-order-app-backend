@@ -12,7 +12,7 @@ class Server{
     }
 
     public configuration(){
-        this.app.set('port',8000)
+        this.app.set('port',process.env.HOST || 8000)
         this.app.use(express.json())
         console.log('port')
     }
