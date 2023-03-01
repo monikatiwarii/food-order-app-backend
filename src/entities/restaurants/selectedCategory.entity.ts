@@ -2,7 +2,7 @@ import {Entity,BaseEntity,PrimaryGeneratedColumn,Column} from 'typeorm'
 
 @Entity('selectedCategory')
 
-export class selectedCategory extends BaseEntity{
+export class SelectedCategory{
 
     @PrimaryGeneratedColumn()
     id : number;

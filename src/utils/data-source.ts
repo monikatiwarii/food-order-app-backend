@@ -1,13 +1,13 @@
 require('dotenv').config()
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import {restaurants} from '../entities/restaurants/restaurants.entity'
-import { category } from '../entities/restaurants/category.entity'
-import { restaurantDescription } from '../entities/restaurants/restaurantDescription.entity'
-import { foodItem } from '../entities/restaurants/foodItem.entity'
+import {Restaurants} from '../entities/restaurants/restaurants.entity'
+import { Category } from '../entities/restaurants/category.entity'
+import { RestaurantDescription } from '../entities/restaurants/restaurantDescription.entity'
+import { FoodItem } from '../entities/restaurants/foodItem.entity'
 import { foodCollection } from '../entities/foods/foodCollection.entity'
 import { foodList } from '../entities/foods/foodList.entity'
-import { selectedCategory } from '../entities/restaurants/selectedCategory.entity'
+import { SelectedCategory } from '../entities/restaurants/selectedCategory.entity'
 import { trandingFood } from '../entities/foods/trandingFood.entity'
 import {login} from '../entities/login/Login.entity'
 
@@ -38,7 +38,8 @@ export const AppDataSource = new DataSource({
     type : 'postgres',
     synchronize : true,
     logging : false,
-    entities : [restaurants,category,restaurantDescription,foodItem,foodCollection,foodList,selectedCategory,trandingFood,login],
+    entities : [Restaurants,Category,FoodItem,RestaurantDescription,FoodItem]
+        // ,foodCollection,foodList,SelectedCategory,trandingFood,login],
    
 })
 

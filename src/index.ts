@@ -1,5 +1,6 @@
 import express,{Request,Response} from "express"
 import { AppDataSource } from "./utils/data-source"
+import router from './routes/index.route'
 
 class Server{
     private app  :express.Application
@@ -12,15 +13,17 @@ class Server{
     }
 
     public configuration(){
-        this.app.set('port',process.env.HOST || 8000)
+        this.app.set('port',8000)
         this.app.use(express.json())
         console.log('port')
     }
 
     public routes(){
+        this.app.use('/api',router)
         this.app.get("/*",(req:Request,res:Response)=>{
             res.send('Invalid page url')
         })
+        
     }
 
     public start(){
