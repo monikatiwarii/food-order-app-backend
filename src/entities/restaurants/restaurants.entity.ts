@@ -1,13 +1,12 @@
-import {Entity,BaseEntity, Column,PrimaryGeneratedColumn,CreateDateColumn,UpdateDateColumn, ManyToMany, JoinColumn, JoinTable, OneToMany} from "typeorm"
+import {Entity, Column,ManyToMany, OneToMany} from "typeorm"
+import Model from "../model.entity";
 import { Category } from "./category.entity";
 import { FoodItem } from "./foodItem.entity";
 
 @Entity('restaurants')
 
-export class Restaurants{
-    @PrimaryGeneratedColumn()
-    id : number;
-
+export class Restaurants extends Model{
+   
     @Column()
     name : string;
 
@@ -38,13 +37,7 @@ export class Restaurants{
         images : string
     }
 
-    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
-    created_at : Date
-
-    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
-    updated_at : Date
- 
-
+   
     @ManyToMany(
         ()=>Category
     )

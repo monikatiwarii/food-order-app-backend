@@ -1,11 +1,10 @@
-import {Entity,BaseEntity,Column, PrimaryGeneratedColumn} from 'typeorm'
+import {Entity,Column} from 'typeorm'
+import Model from '../model.entity';
 
 @Entity('RestaurantDescription')
 
-export class RestaurantDescription{
-    @PrimaryGeneratedColumn()
-    id : number;
-
+export class RestaurantDescription extends Model{
+   
     @Column()
     image : string;
 

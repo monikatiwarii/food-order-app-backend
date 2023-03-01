@@ -39,4 +39,4 @@ AppDataSource.initialize().then(async ()=>{
     server.start()
 }).catch((error : Error)=>{
     console.log(error)
-})
+})  

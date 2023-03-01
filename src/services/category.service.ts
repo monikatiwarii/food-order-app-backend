@@ -15,6 +15,7 @@ export const getAllCategory = async() : Promise<any> =>{
 
         const res= await categoryRepository.save(category)
         console.log("res : ",res);
+        return res
         
     })
 }

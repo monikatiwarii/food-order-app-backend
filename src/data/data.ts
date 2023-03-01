@@ -73,85 +73,109 @@ export const restaurants: restaurantType[] = [
   {
     restaurantId: 1,
     name: `La Pino'z Pizza`,
-    address: 'Vesu,Surat',
+    address: {
+      city: 'Vesu',
+      state: 'Surat',
+      country: 'india'
+    },
     time: {
-      open: '11am',
-      closes: '11pm'
+      opentime: '11am',
+      closetime: '11pm'
     },
     slug: `la-pinoz-pizza`,
     averageCost: 700,
     // foods: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-    images: '/images/Ellipse1.png',
+    image: '/images/Ellipse1.png',
     // category: ['cat-1', 'cat-2', 'cat-3', 'cat-4', 'cat-5', 'cat-6']
   },
   {
     restaurantId: 2,
     name: `McDonald's`,
-    address: 'Adajan,Surat',
+    address: {
+      city: 'Adajan',
+      state: 'Surat',
+      country: 'india'
+    },
     time: {
-      open: '11am',
-      closes: '11pm'
+      opentime: '11am',
+      closetime: '11pm'
     },
     slug: `mcdonald's`,
     averageCost: 500,
     // foods: [17, 18, 21, 22, 23, 24, 25, 27, 28, 29, 30],
-    images: '/images/Ellipse2.png',
+    image: '/images/Ellipse2.png',
     // category: ['cat-1', 'cat-7', 'cat-8', 'cat-9']
   },
   {
     restaurantId: 3,
     name: `Starbucks`,
-    address: 'Vesu,Surat',
+    address: {
+      city: 'Vesu',
+      state: 'Surat',
+      country: 'india'
+    },
     time: {
-      open: '11am',
-      closes: '11pm'
+      opentime: '11am',
+      closetime: '11pm'
     },
     slug: `starbucks`,
     averageCost: 300,
     // foods: [22, 25, 31, 32, 33, 34, 35],
-    images: '/images/Ellipse3.png',
+    image: '/images/Ellipse3.png',
     // category: ['cat-1', 'cat-10', 'cat-11', 'cat-12', 'cat-13']
   },
   {
     restaurantId: 4,
     name: `Burger King`,
-    address: 'Athwagate,Surat',
+    address: {
+      city: 'Athwagate',
+      state: 'Surat',
+      country: 'india'
+    },
     time: {
-      open: '11am',
-      closes: '11pm'
+      opentime: '11am',
+      closetime: '11pm'
     },
     slug: `burger-king`,
     averageCost: 700,
     // foods: [17, 18, 19, 20, 21, 25, 26, 28, 37, 38, 39, 40],
-    images: '/images/Ellipse4.png',
+    image: '/images/Ellipse4.png',
     // category: ['cat-1', 'cat-14', 'cat-15', 'cat-16', 'cat-17']
   },
   {
     restaurantId: 5,
     name: `KFC`,
-    address: 'Athwagate,Surat',
+    address: {
+      city: 'Athwagate',
+      state: 'Surat',
+      country: 'india'
+    },
     time: {
-      open: '11am',
-      closes: '11pm'
+      opentime: '11am',
+      closetime: '11pm'
     },
     slug: `kfc`,
     averageCost: 800,
     // foods: [17, 18, 19, 20, 21, 36, 38, 39, 41, 42, 43, 44],
-    images: '/images/Ellipse5.png',
+    image: '/images/Ellipse5.png',
     // category: ['cat-1', 'cat-18', 'cat-19', 'cat-20', 'cat-21']
   },
   {
     restaurantId: 6,
     name: `Coffee Culture`,
-    address: 'Vesu,Surat',
+    address: {
+      city: 'Vesu',
+      state: 'Surat',
+      country: 'india'
+    },
     time: {
-      open: '11',
-      closes: '11'
+      opentime: '11am',
+      closetime: '11pm'
     },
     slug: `coffee-culture`,
     averageCost: 900,
     // foods: [26, 27, 28, 29, 41, 42, 45, 36, 38],
-    images: '/images/Ellipse6.png',
+    image: '/images/Ellipse6.png',
     // category: ['cat-1', 'cat-21', 'cat-22', 'cat-23']
   }
 ];
