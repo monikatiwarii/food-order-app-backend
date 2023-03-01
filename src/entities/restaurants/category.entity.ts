@@ -1,4 +1,5 @@
 import { Entity, Column, ManyToMany, OneToMany} from 'typeorm'
+import { restaurants } from '../../data/data'
 import Model from '../model.entity'
 import { FoodItem } from './foodItem.entity'
 import { Restaurants } from './restaurants.entity'
@@ -11,8 +12,9 @@ export class Category extends Model  {
     name : string
 
     @ManyToMany(
-        ()=>Restaurants
+        ()=>Restaurants,restaurants => restaurants.category
     )
+    
     restaurants : Restaurants
 
     @OneToMany(

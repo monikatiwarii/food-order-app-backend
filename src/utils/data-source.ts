@@ -9,7 +9,8 @@ import { foodCollection } from '../entities/foods/foodCollection.entity'
 import { foodList } from '../entities/foods/foodList.entity'
 import { SelectedCategory } from '../entities/restaurants/selectedCategory.entity'
 import { trandingFood } from '../entities/foods/trandingFood.entity'
-import {login} from '../entities/login/Login.entity'
+import { User} from '../entities/user/User.entity'
+import { Order } from '../entities/order/Order.entity'
 
 
 type configType = {
@@ -38,8 +39,7 @@ export const AppDataSource = new DataSource({
     type : 'postgres',
     synchronize : true,
     logging : false,
-    entities : [Restaurants,Category,FoodItem,RestaurantDescription,FoodItem]
-        // ,foodCollection,foodList,SelectedCategory,trandingFood,login],
+    entities : [Restaurants,Category,FoodItem,Order,User,FoodItem,RestaurantDescription,foodCollection,foodList,SelectedCategory,trandingFood],
    
 })
 

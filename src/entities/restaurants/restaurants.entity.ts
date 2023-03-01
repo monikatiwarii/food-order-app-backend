@@ -1,4 +1,4 @@
-import {Entity, Column,ManyToMany, OneToMany} from "typeorm"
+import {Entity, Column,ManyToMany, OneToMany, JoinTable, JoinColumn} from "typeorm"
 import Model from "../model.entity";
 import { Category } from "./category.entity";
 import { FoodItem } from "./foodItem.entity";
@@ -36,11 +36,23 @@ export class Restaurants extends Model{
     menu :{
         images : string
     }
-
    
     @ManyToMany(
-        ()=>Category
+        ()=>Category 
     )
+    @JoinTable({
+        name : 'restaurant_category',
+        joinColumn :{
+            name : "restaurantid",
+            referencedColumnName:'id'
+            
+        },
+        inverseJoinColumn:{
+            name : "categoryid",
+            referencedColumnName:'id'
+        }
+    })
+    
     category : Category[]
 
     @OneToMany(type => FoodItem, fooditem=> fooditem.restaurants)

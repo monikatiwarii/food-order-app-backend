@@ -1,3 +1,3 @@
-export interface loginType {
+export interface userType {
   isLoggedIn: boolean;
 }

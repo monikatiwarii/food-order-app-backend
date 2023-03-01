@@ -3,10 +3,10 @@ export interface foodItemType {
   name: string;
   description: string;
   price: number;
-  image: string[];
-  category: string[];
+  image: string;
+  // category: string[];
   restaurant: number;
-  tags: string[];
+  // tags: string[];
   quantity: number;
-  addToCart: boolean;
+  // addToCart: boolean;
 }
