@@ -4,9 +4,10 @@ import { foodItem } from "../data/data";
 import { AppDataSource } from "../utils/data-source";
 
 
-export const insertFoods = async () : Promise<any> =>{
+export const insertFoods = async ()  =>{
 
     const foodItemRepository = AppDataSource.getRepository(FoodItem)
+    
     foodItem.map(async (data)=>{
      const foodItems = new FoodItem()
      foodItems.name = data.name
