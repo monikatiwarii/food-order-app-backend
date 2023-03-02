@@ -5,37 +5,37 @@ import { restaurantType } from '../types/restaurant.type'
 export const insertRestaurant = async(req : Request,res : Response)=>{
     const restaurantList :restaurantType[] = await insertRestaurants(req, res)
     try{
-        res.status(200).json(restaurantList)
+        res.status(200).send({message : 'restaurant list',restaurantList})
     }catch(e){
-        res.status(400).json(e.message)
+        res.status(500).send({message : 'server error',data:e})
     }
 }
 
 export const allRestaurantsList = async(req:Request,res:Response)=>{
-    const allRestaurants = await  fetchAllRestaurants(req,res)
-
+    
     try{
-        res.status(200).json(allRestaurants)
+        const allRestaurants = await  fetchAllRestaurants()
+        res.status(200).send({message : 'restaurant list',allRestaurants})
+
+        if(allRestaurants.length === 0){
+            res.status(404).send({message : 'No recod founds!'})
+        }
     }
     catch(e){
-        res.status(400).json(e.message)
+        res.status(500).send({message : 'server error',data:e})
     }
 }
 
-export const getOneRestaurant = async(req:Request,res:Response)=>{
-    console.log('on find restaurent :: :: :: :: :: ');
-    
-    interface Params{
-        id?: number
-    }
+export const getOneRestaurant = async(req:Request,res:Response)  =>{
     try{
-        let params: Params = req.params
-        const allRestaurants = await findRestaurantsById(params.id)
-        console.log({allRestaurants})
-        return res.status(200).json(allRestaurants)
-        //return allRestaurants
+        const restaurant = await findRestaurantsById(req.params.id)
+
+        if(!restaurant){
+            res.status(404).send({message : 'No recod founds!'})
+        }
+        return res.status(200).send({message:'restaurant',data:restaurant})
     }
     catch(e){
-        return res.status(400).json(e.message)
+        res.status(500).send({message : 'server error',data:e})
     }
 }

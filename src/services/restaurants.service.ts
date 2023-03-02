@@ -27,39 +27,36 @@ export const insertRestaurants = async(req: Request , res : Response) : Promise<
 }
 
 
-export const fetchAllRestaurants = async(req : Request,res : Response) : Promise<any> =>{
+export const fetchAllRestaurants = async() =>{
   try{ 
-  const restaurants = await AppDataSource
+  const restaurants : Restaurants[] = await AppDataSource
     .getRepository(Restaurants)
     .createQueryBuilder("restaurant")
     .select("restaurant")
     .getMany()    
 
-    return Success('Restaurants',restaurants)
+    return restaurants
   }catch(e){
     console.log(e)
-    return Error(e)
+    return e
   }
 }
 
-export const findRestaurantsById = async(id:number)=>{
+export const findRestaurantsById = async(id:string)=>{
 
   try {
     const findRestaurants = await AppDataSource
     .createQueryBuilder()
     .select("restaurants")
     .from(Restaurants, "restaurants")
-    .where("restaurants.id = :id", { id: id })
+    .where("restaurants.id = :id", { id: parseInt(id) })
     .getOne()
 
-    if(!findRestaurants){
-      return Error('No Record found!')
-    } else 
-      return Success('Restaurant Data', findRestaurants)
+    return findRestaurants
    
   } catch (error) {
     console.log(error)
-    return Error(error)
+    return error
   }
 
 } 
