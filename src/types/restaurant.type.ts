@@ -7,7 +7,7 @@ export interface restaurantType {
   averageCost: number;
   // foods: number[];
   image: string;
-  // category: string[];
+  category: number[];
 }
 
 export interface Time {

@@ -86,7 +86,7 @@ export const restaurants: restaurantType[] = [
     averageCost: 700,
     // foods: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
     image: '/images/Ellipse1.png',
-    // category: ['cat-1', 'cat-2', 'cat-3', 'cat-4', 'cat-5', 'cat-6']
+    category: [1, 2, 3, 4, 5, 6]
   },
   {
     restaurantId: 2,
@@ -104,7 +104,7 @@ export const restaurants: restaurantType[] = [
     averageCost: 500,
     // foods: [17, 18, 21, 22, 23, 24, 25, 27, 28, 29, 30],
     image: '/images/Ellipse2.png',
-    // category: ['cat-1', 'cat-7', 'cat-8', 'cat-9']
+    category: [1,7,8,9]
   },
   {
     restaurantId: 3,
@@ -122,7 +122,7 @@ export const restaurants: restaurantType[] = [
     averageCost: 300,
     // foods: [22, 25, 31, 32, 33, 34, 35],
     image: '/images/Ellipse3.png',
-    // category: ['cat-1', 'cat-10', 'cat-11', 'cat-12', 'cat-13']
+    category: [1,10,11,12,13]
   },
   {
     restaurantId: 4,
@@ -140,7 +140,7 @@ export const restaurants: restaurantType[] = [
     averageCost: 700,
     // foods: [17, 18, 19, 20, 21, 25, 26, 28, 37, 38, 39, 40],
     image: '/images/Ellipse4.png',
-    // category: ['cat-1', 'cat-14', 'cat-15', 'cat-16', 'cat-17']
+    category: [1,14,15,16,16]
   },
   {
     restaurantId: 5,
@@ -158,7 +158,7 @@ export const restaurants: restaurantType[] = [
     averageCost: 800,
     // foods: [17, 18, 19, 20, 21, 36, 38, 39, 41, 42, 43, 44],
     image: '/images/Ellipse5.png',
-    // category: ['cat-1', 'cat-18', 'cat-19', 'cat-20', 'cat-21']
+    category: [1,18,19,20,21]
   },
   {
     restaurantId: 6,
@@ -176,7 +176,7 @@ export const restaurants: restaurantType[] = [
     averageCost: 900,
     // foods: [26, 27, 28, 29, 41, 42, 45, 36, 38],
     image: '/images/Ellipse6.png',
-    // category: ['cat-1', 'cat-21', 'cat-22', 'cat-23']
+    category: [1,21,22,23]
   }
 ];
 
