@@ -18,6 +18,7 @@ export const addFoodsItem = async(req:Request,res:Response)=>{
     
     try{
         const foodList = await addFoods(req,res)
+        console.log('foodlist ------------------',foodList)
         res.status(200).send({message : 'foods added',data:foodList})
     }
     catch(e){

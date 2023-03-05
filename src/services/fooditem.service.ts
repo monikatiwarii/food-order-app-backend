@@ -24,6 +24,8 @@ import { Request,Response } from "express";
 export const addFoods = async(req:Request ,res:Response)=>{
 
   let param = req.body
+
+  console.log('param..............',param)
   const fooditem  = new FoodItem()
 
   fooditem.name = param.name;
@@ -32,10 +34,11 @@ export const addFoods = async(req:Request ,res:Response)=>{
   fooditem.quantity = param.quantity;
   fooditem.category = param.category;
   fooditem.description = param.description;
-  fooditem.restaurants = param.restaurant;
+  fooditem.restaurants = param.restaurants;
 
   await FoodItem.save(fooditem)
 
+  return fooditem
 }
 
 export const fetchAllFoods = async() =>{

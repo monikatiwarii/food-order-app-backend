@@ -1,16 +1,31 @@
-import {insertCategory,fecthAllCategory,findCategoryById} from '../services/category.service'
+import {addCategory, fecthAllCategory,findCategoryById} from '../services/category.service'
 import {Request,Response} from 'express'
 import { categoryType } from '../types/category.type' 
 
-export const getCategoryList = async (req : Request , res : Response)=>{
+// export const getCategoryList = async (req : Request , res : Response)=>{
     
+//     try{
+//         const categoryList : categoryType[] = await insertCategory();
+//         return res.status(200).send({message:'category list',data:categoryList})
+//     }
+//     catch(e){
+//         return res.status(500).send({message : 'server error',data:e})
+//     }
+// }
+
+
+export const addCategories = async(req:Request,res:Response)=>{
     try{
-        const categoryList : categoryType[] = await insertCategory();
-        return res.status(200).send({message:'category list',data:categoryList})
+        const categoryList = await addCategory(req,res)
+
+        res.status(200).send({message:'category added!',data:categoryList})
     }
     catch(e){
         return res.status(500).send({message : 'server error',data:e})
     }
+   
+
+
 }
 
 export const allCategoryList = async(req:Request,res:Response)=>{
