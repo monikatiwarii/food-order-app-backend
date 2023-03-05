@@ -7,7 +7,9 @@ import { FoodItem } from "./foodItem.entity";
 
 export class Restaurants extends Model{
    
-    @Column()
+    @Column({
+        unique:true
+    })
     name : string;
 
     @Column('simple-json',{nullable : true})
@@ -29,13 +31,11 @@ export class Restaurants extends Model{
     @Column({default : 0})
     price : number;
 
-    @Column()
-    image : string;
+    @Column('jsonb',{nullable : true})
+    images : string
 
-    @Column('simple-json',{nullable : true})
-    menu :{
-        images : string
-    }
+    @Column('jsonb',{nullable : true})
+    menu :string[]
    
     @ManyToMany(
         ()=>Category 
@@ -57,4 +57,5 @@ export class Restaurants extends Model{
 
     @OneToMany(type => FoodItem, fooditem=> fooditem.restaurants)
     fooditem : FoodItem[]
+  restaurant: Express.Multer.File;
 }

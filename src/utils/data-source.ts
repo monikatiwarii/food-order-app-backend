@@ -38,7 +38,7 @@ export const AppDataSource = new DataSource({
     ...postgresConfig,
     type : 'postgres',
     synchronize : true,
-    logging : false,
+    logging : true,
     entities : [Restaurants,Category,FoodItem,Order,User,FoodItem,RestaurantDescription,foodCollection,foodList,SelectedCategory,trandingFood],
    
 })

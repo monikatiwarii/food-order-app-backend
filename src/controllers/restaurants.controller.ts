@@ -1,15 +1,28 @@
-import  {insertRestaurants,fetchAllRestaurants, findRestaurantsById} from '../services/restaurants.service'
+import  {addRestaurant,fetchAllRestaurants, findRestaurantsById} from '../services/restaurants.service'
 import { Request,Response } from 'express'
 import { restaurantType } from '../types/restaurant.type'
 
-export const insertRestaurant = async(req : Request,res : Response)=>{
-    const restaurantList :restaurantType[] = await insertRestaurants(req, res)
+// export const insertRestaurant = async(req : Request,res : Response)=>{
+//     const restaurantList :restaurantType[] = await insertRestaurants(req, res)
+//     try{
+//         res.status(200).send({message : 'restaurant list',restaurantList})
+//     }catch(e){
+//         res.status(500).send({message : 'server error',data:e})
+//     }
+// }
+
+export const addRestaurants = async(req:Request,res:Response)=>{
     try{
-        res.status(200).send({message : 'restaurant list',restaurantList})
+       
+        const restaurant  = await addRestaurant(req,res)
+        return res.status(200).send({message:'Restaurant Added!',data:restaurant})
     }catch(e){
-        res.status(500).send({message : 'server error',data:e})
+        console.log(e)
+        return res.status(500).send({message:'server error'})
     }
-}
+
+
+} 
 
 export const allRestaurantsList = async(req:Request,res:Response)=>{
     

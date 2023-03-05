@@ -5,9 +5,9 @@ import { foodItemType } from '../types/foodItem.type'
 
 export const insertFoodItems = async(req : Request,res : Response) =>{
 
-    const foodList : foodItemType[] = await insertFoods() 
+    const foodList  = await insertFoods() 
     try{
-        res.status(200).send({message : 'food list',data:foodList})
+       res.status(200).send({message : 'food list',data:foodList})
     }
     catch(e){
         res.status(500).send({message : 'server error',data:e})

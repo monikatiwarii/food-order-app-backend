@@ -8,7 +8,9 @@ import { Restaurants } from './restaurants.entity'
 
 export class Category extends Model  { 
     
-    @Column()
+    @Column({
+        unique:true
+    })
     name : string
 
     @ManyToMany(
