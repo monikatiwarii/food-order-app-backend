@@ -1,13 +1,24 @@
-import {insertFoods,fetchAllFoods,findFoodItemById} from '../services/fooditem.service'
+import {fetchAllFoods,findFoodItemById, addFoods} from '../services/fooditem.service'
 import { Request,Response } from "express"
 import { foodItemType } from '../types/foodItem.type'
 
 
-export const insertFoodItems = async(req : Request,res : Response) =>{
+// export const insertFoodItems = async(req : Request,res : Response) =>{
 
-    const foodList  = await insertFoods() 
+//     const foodList  = await insertFoods() 
+//     try{
+//        res.status(200).send({message : 'food list',data:foodList})
+//     }
+//     catch(e){
+//         res.status(500).send({message : 'server error',data:e})
+//     }
+// }
+
+export const addFoodsItem = async(req:Request,res:Response)=>{
+    
     try{
-       res.status(200).send({message : 'food list',data:foodList})
+        const foodList = await addFoods(req,res)
+        res.status(200).send({message : 'foods added',data:foodList})
     }
     catch(e){
         res.status(500).send({message : 'server error',data:e})
