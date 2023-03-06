@@ -6,7 +6,6 @@ import { Success,Error } from "../utils/restResponse"
 import { Request,Response } from "express"
 import { Category } from "../entities/restaurants/category.entity"
 import { categoryType } from "../types/category.type"
-import { QueryRunnerProviderAlreadyReleasedError } from "typeorm"
 import { CreateFileObj } from "../controllers/common.controller"
 
 
@@ -29,7 +28,6 @@ import { CreateFileObj } from "../controllers/common.controller"
 // }
 
 
-
 export const addRestaurant  =  async(req:Request,res:Response)=>{
   let fileObj = await CreateFileObj(req);
   
@@ -47,8 +45,6 @@ export const addRestaurant  =  async(req:Request,res:Response)=>{
         .values(categoryData)
         .orUpdate(['name'],['name'])
         .execute();
-
-      console.log('categories from rest.service.ts  :: :: :: ', categories.raw)
 
       const restaurantData = new Restaurants();
       restaurantData.name = param.name;
