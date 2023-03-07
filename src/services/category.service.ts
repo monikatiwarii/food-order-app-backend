@@ -8,7 +8,7 @@ import { Error, Success } from "../utils/restResponse";
 import { IRespObj, IResponse } from "../types/response.type";
 
 
-export const addCategory = async(bodyData : any)  =>{
+export const addCategory = async(bodyData : any) : Promise<IResponse> =>{
 
     try{
         let param = bodyData

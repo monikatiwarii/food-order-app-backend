@@ -1,73 +1,53 @@
 import  {addRestaurant,fetchAllRestaurants, findRestaurantsById, updateRestaurant} from '../services/restaurants.service'
 import { Request,Response } from 'express'
 import { restaurantType } from '../types/restaurant.type'
+import { IResponse } from '../types/response.type'
 
-// export const insertRestaurant = async(req : Request,res : Response)=>{
-//     const restaurantList :restaurantType[] = await insertRestaurants(req, res)
-//     try{
-//         res.status(200).send({message : 'restaurant list',restaurantList})
-//     }catch(e){
-//         res.status(500).send({message : 'server error',data:e})
-//     }
-// }
 
-export const addRestaurants = async(req:Request,res:Response)=>{
+export const addRestaurants = async(req:Request,res:Response) =>{
     try{
        
-        const restaurant  = await addRestaurant(req,res)
-        return res.status(200).send({message:'Restaurant Added!',data:restaurant})
+        const restaurant :IResponse  = await addRestaurant(req)
+        return res.status(restaurant.code).send(restaurant)
     }catch(e){
         console.log(e)
-        return res.status(500).send({message:e.message})
+        return res.status(500).send("SERVER ERROR!")
     }
-
-
 } 
 
 export const allRestaurantsList = async(req:Request,res:Response)=>{
     
     try{
-        const allRestaurants = await  fetchAllRestaurants()
-        res.status(200).send({message : 'restaurant list',allRestaurants})
-
-        if(allRestaurants.length === 0){
-            res.status(404).send({message : 'No recod founds!'})
-        }
+        const allRestaurants : IResponse = await  fetchAllRestaurants()
+        res.status(allRestaurants.code).send(allRestaurants)
     }
     catch(e){
         console.log(e);
-        res.status(500).send({message:e.message})   
+        return res.status(500).send("SERVER ERROR!")
+
      }
 }
 
 export const getOneRestaurant = async(req:Request,res:Response)  =>{
     try{
-        const restaurant = await findRestaurantsById(req.params.id)
+        const restaurant: IResponse = await findRestaurantsById(req.params.id)
 
-        if(!restaurant){
-            res.status(404).send({message : 'No recod founds!'})
-        }
-        return res.status(200).send({message:'restaurant',data:restaurant})
+        return res.status(restaurant.code).send(restaurant)
     }
     catch(e){
         console.log(e);
-        res.status(500).send({message:e.message})   
+        return res.status(500).send("SERVER ERROR!")  
     }
 }
 
 export const updateRestaurantController  = async(req:Request,res:Response)=>{
 
     try{
-
-            const restaurant = await updateRestaurant(req)
-
-            if(!restaurant){
-                res.status(404).send({message : 'No recod founds!'})
-            }
-            return res.status(200).send({message:'restaurant',data:restaurant})
+        const restaurant: IResponse = await updateRestaurant(req)
+        return res.status(restaurant.code).send(restaurant)
     }
     catch(e){
         console.log(e);
-        res.status(500).send({message:e.message})   
+         return res.status(500).send("SERVER ERROR!")  
     }
 }
