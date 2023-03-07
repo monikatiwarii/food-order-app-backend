@@ -5,7 +5,7 @@ import { categoryType } from '../types/category.type'
 
 export const addCategories = async(req:Request,res:Response)=>{
     try{
-        const categoryList = await addCategory(req,res)
+        const categoryList = await addCategory(req.body)
 
         res.status(200).send({message:'category added!',data:categoryList})
     }
