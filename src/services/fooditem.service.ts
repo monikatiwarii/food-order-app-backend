@@ -3,29 +3,15 @@ import { foodItemType } from "../types/foodItem.type";
 import { foodItem } from "../data/data";
 import { AppDataSource } from "../utils/data-source";
 import { Request, Response } from "express";
+import { IResponse } from "../types/response.type";
+import { Error, Success } from "../utils/restResponse";
 
 
-// export const insertFoods = async ()  =>{
-
-//     const foodItemRepository = AppDataSource.getRepository(FoodItem)
-
-//     foodItem.map(async (data)=>{
-//      const foodItems = new FoodItem()
-//      foodItems.name = data.name
-//      foodItems.description = data.description
-//      foodItems.price = data.price
-//      foodItems.image = data.image
-//      foodItems.quantity = data.quantity
-//      const res = await foodItemRepository.save(foodItems)
-//      return res
-//     })
-// }
-
-export const addFoods = async (req: Request, res: Response) => {
+export const addFoods = async (bodyData : any): Promise<IResponse> => {
   try {
-    let param = req.body
+  
+    let param = bodyData
     const fooditem = new FoodItem()
-
     fooditem.name = param.name;
     fooditem.image = param.image;
     fooditem.price = param.price;
@@ -36,32 +22,36 @@ export const addFoods = async (req: Request, res: Response) => {
 
     await FoodItem.save(fooditem)
 
-    return fooditem
+    return Success('Food Item Added!', foodItem)
   }
   catch (e) {
     console.log(e)
-    return e
+    return Error(e.message)
   }
 
 }
 
-export const fetchAllFoods = async () => {
+export const fetchAllFoods = async () : Promise<IResponse> => {
 
   try {
-    const allFoods: foodItemType[] = await AppDataSource
+    const allFoods= await AppDataSource
       .getRepository(FoodItem)
       .createQueryBuilder("fooditem")
       .select("fooditem")
       .getMany()
 
-    return allFoods
+      if(!allFoods)
+            return Error('No FoodItem Found!', [], 404)
+        else
+          return Success('Food Lists!', allFoods)
+
   } catch (e) {
     console.log(e)
-    return e
+    return Error(e.message)
   }
 }
 
-export const findFoodItemById = async (id: string) => {
+export const findFoodItemById = async (id: string): Promise<IResponse> => {
 
   try {
     const fooditem = await AppDataSource
@@ -71,11 +61,14 @@ export const findFoodItemById = async (id: string) => {
       .where("fooditem.id = :id", { id: id })
       .getOne()
 
-    return fooditem
+      if(!fooditem) 
+        return Error('No FoodItem Found!', [], 404)
+      else
+        return Success('Food Lists!', fooditem)
   }
   catch (e) {
     console.log(e)
-    return e
+    return Error(e.message)
   }
 
 }
