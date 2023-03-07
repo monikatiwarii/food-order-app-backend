@@ -18,7 +18,7 @@ export const addRestaurants = async(req:Request,res:Response)=>{
         return res.status(200).send({message:'Restaurant Added!',data:restaurant})
     }catch(e){
         console.log(e)
-        return res.status(500).send({message:'server error'})
+        return res.status(500).send({message:e.message})
     }
 
 
@@ -35,8 +35,9 @@ export const allRestaurantsList = async(req:Request,res:Response)=>{
         }
     }
     catch(e){
-        res.status(500).send({message : 'server error',data:e})
-    }
+        console.log(e);
+        res.status(500).send({message:e.message})   
+     }
 }
 
 export const getOneRestaurant = async(req:Request,res:Response)  =>{
@@ -49,6 +50,7 @@ export const getOneRestaurant = async(req:Request,res:Response)  =>{
         return res.status(200).send({message:'restaurant',data:restaurant})
     }
     catch(e){
-        res.status(500).send({message : 'server error',data:e})
+        console.log(e);
+        res.status(500).send({message:e.message})   
     }
 }

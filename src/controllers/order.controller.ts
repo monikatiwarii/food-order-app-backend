@@ -11,7 +11,7 @@ export const allOrderList = async(req:Request,res:Response)=>{
 
     }catch(e){
 
-        res.status(500).send({message:"server error",data:e})
+        return res.status(500).send({message:e.message})
     }
 }
 
@@ -22,7 +22,7 @@ export const orderDatabyId = async(req:Request,res:Response)=>{
         res.status(200).send({message:'order data',data:order})
 
     }catch(e){
-        res.status(500).send({message:"server error",data:e})
+        return res.status(500).send({message:e.message})
     }
 }
 
@@ -34,6 +34,6 @@ export const orderDataByUserId = async(req:Request,res:Response)=>{
         res.status(200).send({message:'order data',data:order})
 
     }catch(e){
-        res.status(500).send({message:"server error",data:e})
+        return res.status(500).send({message:e.message})
     }
 }

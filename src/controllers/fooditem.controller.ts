@@ -18,11 +18,11 @@ export const addFoodsItem = async(req:Request,res:Response)=>{
     
     try{
         const foodList = await addFoods(req,res)
-        console.log('foodlist ------------------',foodList)
         res.status(200).send({message : 'foods added',data:foodList})
     }
     catch(e){
-        res.status(500).send({message : 'server error',data:e})
+        console.log(e)
+        return res.status(500).send({message:e.message})
     }
 }
 
@@ -37,7 +37,7 @@ export const allFoodItems = async(req:Request,res:Response)=>{
     }
     catch(e){
         console.log(e)
-       return res.status(500).send({message : 'server error',data:e})
+       return res.status(500).send({message:e.message})
     }
 }
 
@@ -55,7 +55,7 @@ export const getOneFoodItem =async(req:Request,res:Response) => {
     }
     catch(e){
         console.log(e)
-       return res.status(500).send({message : 'server error',data:e}) 
+       return res.status(500).send({message:e.message})
     }
     
 }

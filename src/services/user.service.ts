@@ -11,8 +11,7 @@ export const addUser = async(req:Request,res:Response)=>{
         user.password = req.body.password
 
         await User.save(user)
-        return user
-        
+        return user   
 
     }
     catch(e){
@@ -45,7 +44,6 @@ export const findUserById = async(id:string)=>{
             .where("id = :id",{id:parseInt(id)})
             .getOne()
           
-
             return user
     }
     catch(e){
@@ -57,16 +55,17 @@ export const findUserById = async(id:string)=>{
 
 
 export const deleteUser = async(id:string)=>{
+ 
+ try{
     const userData = await findUserById(id)
-    console.log({userData})
-
     if(!userData)
         return {
             mssg: 'User not found!',
             valid: false
         }
 
-const user  = await AppDataSource
+    const user  = await AppDataSource
+    
     .getRepository(User)
     .createQueryBuilder('users')
     .delete()
@@ -74,9 +73,14 @@ const user  = await AppDataSource
     .where("id = :id", { id: parseInt(id) })
     .execute()
 
-    console.log('user------------',user)
     return {
         mssg: 'User Deleted!',
         valid: true
     }
+
+ }catch(e){
+    console.log(e)
+    return e
+ } 
+   
 }

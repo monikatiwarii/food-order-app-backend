@@ -22,29 +22,37 @@ import { Request,Response } from "express";
 
 export const addCategory = async(req:Request,res:Response)=>{
 
-    let param = req.body
-    const category = new Category()
-
-    category.name = param.name;
-    category.restaurants = param.restaurants;
-    await Category.save(category)
-
-    return category
+    try{
+        let param = req.body
+        const category = new Category()
+    
+        category.name = param.name;
+        category.restaurants = param.restaurants;
+        await Category.save(category)
+    
+        return category
+    }
+    catch(e){
+        console.log(e)
+        return e
+    }
+   
 
 }
 
 export const fecthAllCategory = async()=>{
     try{
-        const findAllCategories : categoryType[] = await AppDataSource.getRepository(Category)
+        const findAllCategories = await AppDataSource
+        .getRepository(Category)
         .createQueryBuilder("category")
         .select("category")
         .getMany()
     
         return findAllCategories
     }
-    catch(error){
-        console.log(error)
-        return error
+    catch(e){
+        console.log(e)
+        return e
     }
 }
 
@@ -59,8 +67,8 @@ export const findCategoryById = async(id:string)=>{
 
         return findCategory
     }
-    catch(error){
-        console.log(error)
-        return error
+    catch(e){
+        console.log(e)
+        return e
     }
 }

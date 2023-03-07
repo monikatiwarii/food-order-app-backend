@@ -1,12 +1,19 @@
 import jwt from 'jsonwebtoken'
-import { Request,Response,NextFunction } from 'express'
+import { Request, Response, NextFunction } from 'express'
+const jwtKey = "food_order_key"//process.env.JWT_SECRET_KEY;
 
-export const verifyToken = (req:Request,res:Response,next:NextFunction)=>{
-    let token = req.headers['authorization']
-    token = token.split(" ")[1];
-    jwt.verify(token, process.env.SECRET_KEY, (err, data)=> {
-        console.log('err :: :: :: :: ',{err})
-        console.log('data : :: :: ::',{data})
-        return res.send('error')
-    } )
-}
+export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
+
+    let token = req.headers['authorization'];
+    if (token) {
+        token = token.split(' ')[1]
+        jwt.verify(token, jwtKey, (err, data) => {
+    
+          if (err) res.status(401).send('Provide valid token');
+          else next();
+        })
+      } else {
+        res.status(403).send('Add token with header');
+      }
+  }
+  

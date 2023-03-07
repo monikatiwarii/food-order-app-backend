@@ -7,9 +7,9 @@ export const addUsers = async(req:Request,res:Response)=>{
         const user = await addUser(req,res)
         return res.status(200).send({message:'Users',data:user})   
     }
-    catch(error){
-        console.log(error)
-        return res.status(500).send({message:'server error'})
+    catch(e){
+        console.log(e)
+        return res.status(500).send({message:e.message})
     }
 } 
 
@@ -25,9 +25,9 @@ export const allUsers = async(req:Request,res:Response)=>{
             return res.status(200).send({message:'Users',data:users})
         }
     }
-    catch(error){
-        console.log(error)
-        return res.status(500).send({message:'server error'})
+    catch(e){
+        console.log(e)
+        return res.status(500).send({message:e.message})
     }
    
 }
@@ -44,9 +44,9 @@ export const findUser = async(req:Request,res:Response)=>{
             return res.status(200).send({message:'user',data:user})
 
         }
-    }catch(error){
-            console.log(error)
-            return res.status(500).send({message:'server error'})
+    }catch(e){
+            console.log(e)
+            return res.status(500).send({message:e.message})
         }
 }
 
@@ -59,8 +59,8 @@ export const deletedUser = async(req:Request,res:Response)=>{
         else 
             res.status(404).send(user)
 
-    }catch(error){
-            console.log(error)
-            return res.status(500).send({message:'server error'})
+    }catch(e){
+            console.log(e)
+            return res.status(500).send({message:e.message})
         }
 }

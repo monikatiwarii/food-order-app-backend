@@ -2,13 +2,13 @@ import { FoodItem } from "../entities/restaurants/foodItem.entity";
 import { foodItemType } from "../types/foodItem.type";
 import { foodItem } from "../data/data";
 import { AppDataSource } from "../utils/data-source";
-import { Request,Response } from "express";
+import { Request, Response } from "express";
 
 
 // export const insertFoods = async ()  =>{
 
 //     const foodItemRepository = AppDataSource.getRepository(FoodItem)
-    
+
 //     foodItem.map(async (data)=>{
 //      const foodItems = new FoodItem()
 //      foodItems.name = data.name
@@ -21,57 +21,61 @@ import { Request,Response } from "express";
 //     })
 // }
 
-export const addFoods = async(req:Request ,res:Response)=>{
+export const addFoods = async (req: Request, res: Response) => {
+  try {
+    let param = req.body
+    const fooditem = new FoodItem()
 
-  let param = req.body
+    fooditem.name = param.name;
+    fooditem.image = param.image;
+    fooditem.price = param.price;
+    fooditem.quantity = param.quantity;
+    fooditem.category = param.category;
+    fooditem.description = param.description;
+    fooditem.restaurants = param.restaurants;
 
-  console.log('param..............',param)
-  const fooditem  = new FoodItem()
+    await FoodItem.save(fooditem)
 
-  fooditem.name = param.name;
-  fooditem.image = param.image;
-  fooditem.price = param.price;
-  fooditem.quantity = param.quantity;
-  fooditem.category = param.category;
-  fooditem.description = param.description;
-  fooditem.restaurants = param.restaurants;
+    return fooditem
+  }
+  catch (e) {
+    console.log(e)
+    return e
+  }
 
-  await FoodItem.save(fooditem)
-
-  return fooditem
 }
 
-export const fetchAllFoods = async() =>{
-    
-    try{
-    const allFoods : foodItemType[] = await AppDataSource
-    .getRepository(FoodItem)
-    .createQueryBuilder("fooditem")
-    .select("fooditem")
-    .getMany()
+export const fetchAllFoods = async () => {
+
+  try {
+    const allFoods: foodItemType[] = await AppDataSource
+      .getRepository(FoodItem)
+      .createQueryBuilder("fooditem")
+      .select("fooditem")
+      .getMany()
 
     return allFoods
-  }catch(e){
+  } catch (e) {
     console.log(e)
     return e
   }
 }
 
-export const findFoodItemById = async(id:string) =>{
+export const findFoodItemById = async (id: string) => {
 
-  try{
+  try {
     const fooditem = await AppDataSource
-  .createQueryBuilder()
-  .select("fooditem")
-  .from(FoodItem,"fooditem")
-  .where("fooditem.id = :id",{id:id})
-  .getOne()
+      .createQueryBuilder()
+      .select("fooditem")
+      .from(FoodItem, "fooditem")
+      .where("fooditem.id = :id", { id: id })
+      .getOne()
 
-  return fooditem
+    return fooditem
   }
-  catch(e){
+  catch (e) {
     console.log(e)
     return e
   }
-  
+
 }

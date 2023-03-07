@@ -36,10 +36,8 @@ const upload = multer({
             file.mimetype == "image/jpg" ||
             file.mimetype == "image/jpeg"
         ){
-            console.log('successfull')
             cb(null,true)
         }else{
-            console.log("failed")
             cb(null,false)
         }
 

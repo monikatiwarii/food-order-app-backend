@@ -1,29 +1,30 @@
-import { Request,Response } from "express";
+import { Request, Response } from "express";
 import { User } from "../entities/user/User.entity";
 import { AppDataSource } from "../utils/data-source";
 import jwt from "jsonwebtoken";
+const jwtKey = "food_order_key"//process.env.JWT_SECRET_KEY;
+export const loginService = async (userCredential: any) => {
 
-export const loginService = async(req:Request,res:Response)=>{
- 
-    const userData = await AppDataSource
-    .getRepository(User)
-    .findOne({
-        where :{
-            email : req.body.email,
-            password:req.body.password
-        }
-    })
+    try {
+        const userData: any = await AppDataSource
+            .getRepository(User)
+            .findOne({
+                where: {
+                    email: userCredential.email,
+                    password: userCredential.password
+                }
+            })
 
-    if(userData){
-        let token = jwt.sign( { user: userData }, process.env.SECRET_KEY, { expiresIn: 86400 } )
-        if(token){
-            return token  
-        }
-        else{
-            return {message:'token invalid!'}
+        if (userData) {
+            let token = jwt.sign(userData['id'], jwtKey, { expiresIn: 86400 })
+            return {
+                token
+            }
         }
     }
-    else{
-        return { message: 'Invalid UserID or Password',   data: {}}
+    catch (e) {
+        console.log(e)
+        return e.message
     }
+
 }

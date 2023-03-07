@@ -29,6 +29,8 @@ import { CreateFileObj } from "../controllers/common.controller"
 
 
 export const addRestaurant  =  async(req:Request,res:Response)=>{
+  
+try{
   let fileObj = await CreateFileObj(req);
   
   let param = req.body;
@@ -38,7 +40,6 @@ export const addRestaurant  =  async(req:Request,res:Response)=>{
     images: fileObj.images
   };
   const categoryData = Category.create(JSON.parse(req.body.category))
-  console.log('categoty data----------',categoryData)
       const categories : any = await Category.createQueryBuilder()
         .insert()
         .into(Category)
@@ -59,6 +60,12 @@ export const addRestaurant  =  async(req:Request,res:Response)=>{
       await Restaurants.save(restaurantData);
 
       return restaurantData
+}  
+catch(e){
+  console.log(e)
+  return e
+}
+  
 }
 
 

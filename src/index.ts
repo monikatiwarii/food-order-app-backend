@@ -43,7 +43,6 @@ class Server{
 }
 
 AppDataSource.initialize().then(async ()=>{
-    console.log('connected')
     const server = new Server();
     server.start()
 }).catch((error : Error)=>{

@@ -10,7 +10,6 @@ export const fetchAllOrder = async()=>{
         .createQueryBuilder("order")
         .select("order")
         .getMany()
-
         return order
     }
     catch(e){
