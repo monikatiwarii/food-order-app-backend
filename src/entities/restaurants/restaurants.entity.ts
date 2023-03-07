@@ -38,7 +38,7 @@ export class Restaurants extends Model{
     menu :string[]
    
     @ManyToMany(
-        ()=>Category 
+        ()=>Category ,(category)=>category.restaurants
     )
     @JoinTable({
         name : 'restaurant_category',

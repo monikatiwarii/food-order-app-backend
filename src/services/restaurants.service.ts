@@ -68,7 +68,6 @@ catch(e){
   
 }
 
-
 export const fetchAllRestaurants = async() =>{
   try{ 
   const restaurants : Restaurants[] = await AppDataSource
@@ -102,3 +101,34 @@ export const findRestaurantsById = async(id:string)=>{
   }
 
 } 
+
+export const updateRestaurant = async (req:Request)=>{
+
+    try{
+      let param = req.body
+      let params = req.params
+      const restaurant = await AppDataSource
+      .createQueryBuilder()
+      .update(Restaurants)
+      .set({
+        name : param.name,
+        images : param.images,
+        time : param.time,
+        address : param.address,
+        slug : param.slug,
+        price : param.price,
+        menu : param.menu
+        // category : categoryData
+      })
+      .where("id = :id",{id:params.id})
+      .execute()
+
+      return restaurant
+
+    }
+    catch (error) {
+      console.log(error)
+      return error
+    }
+  
+}

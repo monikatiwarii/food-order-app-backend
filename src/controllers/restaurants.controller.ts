@@ -1,4 +1,4 @@
-import  {addRestaurant,fetchAllRestaurants, findRestaurantsById} from '../services/restaurants.service'
+import  {addRestaurant,fetchAllRestaurants, findRestaurantsById, updateRestaurant} from '../services/restaurants.service'
 import { Request,Response } from 'express'
 import { restaurantType } from '../types/restaurant.type'
 
@@ -48,6 +48,23 @@ export const getOneRestaurant = async(req:Request,res:Response)  =>{
             res.status(404).send({message : 'No recod founds!'})
         }
         return res.status(200).send({message:'restaurant',data:restaurant})
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).send({message:e.message})   
+    }
+}
+
+export const updateRestaurantController  = async(req:Request,res:Response)=>{
+
+    try{
+
+            const restaurant = await updateRestaurant(req)
+
+            if(!restaurant){
+                res.status(404).send({message : 'No recod founds!'})
+            }
+            return res.status(200).send({message:'restaurant',data:restaurant})
     }
     catch(e){
         console.log(e);

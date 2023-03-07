@@ -20,10 +20,11 @@ import { Request,Response } from "express";
 //     })
 // }
 
-export const addCategory = async(bodyData)=>{
+export const addCategory = async(bodyData : any)=>{
 
     try{
         let param = bodyData
+
         const category = new Category()
     
         category.name = param.name;

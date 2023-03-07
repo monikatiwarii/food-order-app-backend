@@ -5,7 +5,7 @@ import { categoryType } from '../types/category.type'
 
 export const addCategories = async(req:Request,res:Response)=>{
     try{
-        const categoryList = await addCategory(req.body)
+        const categoryList: categoryType[] = await addCategory(req.body)
 
         res.status(200).send({message:'category added!',data:categoryList})
     }
@@ -13,9 +13,6 @@ export const addCategories = async(req:Request,res:Response)=>{
         console.log(e);
         return res.status(500).send({message:e.message})
     }
-   
-
-
 }
 
 export const allCategoryList = async(req:Request,res:Response)=>{
@@ -36,7 +33,7 @@ export const allCategoryList = async(req:Request,res:Response)=>{
 
 export const getOneCategory = async(req:Request,res:Response) =>{
     try{
-        const category = await findCategoryById(req.params.id)
+        const category : categoryType[] = await findCategoryById(req.params.id)
 
         if(!category){
             return res.status(200).send({message:'No record found!'})

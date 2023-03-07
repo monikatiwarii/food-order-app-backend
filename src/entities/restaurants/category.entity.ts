@@ -16,8 +16,7 @@ export class Category extends Model  {
     @ManyToMany(
         ()=>Restaurants,restaurants => restaurants.category
     )
-    
-    restaurants : Restaurants
+    restaurants : Restaurants[]
 
     @OneToMany(
         type =>  FoodItem, fooditem => fooditem.category
