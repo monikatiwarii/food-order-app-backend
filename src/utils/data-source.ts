@@ -13,6 +13,7 @@ import { User} from '../entities/user/User.entity'
 import { Order } from '../entities/order/Order.entity'
 import { Coupons } from '../entities/order/coupons.entity'
 import { Cart } from '../entities/cart/Cart.entity'
+import { OrderDetails } from '../entities/order/OrderDetails.entity'
 
 type configType = {
     host :string;
@@ -54,7 +55,8 @@ export const AppDataSource = new DataSource({
         trandingFood,
         Coupons,
         Cart,
-        Order
+        Order,
+        OrderDetails
     ],
 })
 

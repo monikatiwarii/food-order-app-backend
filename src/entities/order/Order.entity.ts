@@ -2,6 +2,7 @@ import { Entity,BaseEntity,PrimaryGeneratedColumn,Column, CreateDateColumn, Upda
 import { User } from "../user/User.entity";
 import Model from "../model.entity";
 import { FoodItem } from "../restaurants/foodItem.entity";
+import { OrderDetails } from "./OrderDetails.entity";
 
 @Entity('order')
 
@@ -21,4 +22,10 @@ export class Order extends Model{
         name : "user"
     })
     user: User
+
+    @OneToMany(
+        () => OrderDetails,
+        (order_details) => order_details.order
+    )
+    order_details: OrderDetails[]
 }
