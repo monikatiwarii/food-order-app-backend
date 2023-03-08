@@ -15,13 +15,15 @@ export class User extends Model{
     @Column()
     password : string
 
-    @OneToMany(type => Order,order=>order.user)
-    order : Order
-    Cart: any;
-
     @OneToMany(
         () => Cart,
         (cart) => cart.user
     )
     cart: User[]
+
+    @OneToMany(
+        () => Order,
+        (order)=> order.user
+    )
+    order: Order[]
 }

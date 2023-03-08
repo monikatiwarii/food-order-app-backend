@@ -11,7 +11,7 @@ export class Cart extends Model{
 
     @ManyToOne(
         () => User, 
-        (user) => user.Cart
+        (user) => user.cart
     )
     @JoinColumn({
         name: 'user'

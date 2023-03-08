@@ -53,7 +53,8 @@ export const AppDataSource = new DataSource({
         SelectedCategory,
         trandingFood,
         Coupons,
-        Cart
+        Cart,
+        Order
     ],
 })
 
