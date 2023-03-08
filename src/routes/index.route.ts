@@ -6,6 +6,7 @@ import orderRouter from '../routes/order.route'
 import loginRouter from '../routes/login.route'
 import cart from '../routes/cart.routes'
 import * as express from 'express'
+import checkOut from '../routes/checkout.routes'
 // import { verifyToken } from '../utils/jwt'
 
 const router = express.Router()
@@ -20,6 +21,7 @@ router.use('/foods',foodRouter)
 router.use('/user',userRouter)
 router.use('/order',orderRouter)
 router.use('/cart', cart)
+router.use('/checkout', checkOut)
 
 
 export default router

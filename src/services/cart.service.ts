@@ -66,16 +66,16 @@ export const updateCart = async (req) : Promise<IResponse>=> {
 }
 
 export const fetchCartData = async (userId: number): Promise<IResponse> => {
-    const FoodData = await AppDataSource
+    const cartData = await AppDataSource
     .getRepository(Cart)
     .createQueryBuilder('cart')
-    // .select('cart')
     .leftJoinAndSelect("cart.fooditem", "fooditem")
-    // .from(Cart, 'cart')
     .where("cart.user = :userId", {userId: userId})
     .getMany()
-    
-    return Success('Cart Data!', FoodData)
+
+    let total = findSumOfCartData(cartData)
+
+    return Success('Cart Data!',{ cartData, total})
 }
 
 const findCartData = async (foodId: number, userId: number) => {
@@ -87,4 +87,21 @@ const findCartData = async (foodId: number, userId: number) => {
         .andWhere("cart.fooditem = :foodItemId", {foodItemId: foodId})
         .getOne()
     return FoodData
+}
+
+export const findSumOfCartData = (cartData: any[]): number => {
+    let sum = 0
+    for(let item of cartData){
+        sum += (item["quantity"] * item["fooditem"]["price"])
+    }
+    return sum
+}
+
+export const removeCartData = async (userId: number) : Promise<void> => {
+    await AppDataSource
+        .createQueryBuilder()
+        .delete()
+        .from(Cart)
+        .where("user= :id", {id: userId})
+        .execute()
 }

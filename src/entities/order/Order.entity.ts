@@ -9,7 +9,7 @@ import { OrderDetails } from "./OrderDetails.entity";
 export class Order extends Model{
    
     @Column()
-    price : number
+    total : number
 
     @ManyToOne(
         () => User,
