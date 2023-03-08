@@ -1,5 +1,6 @@
 import  {Entity,Column, ManyToOne, JoinColumn } from 'typeorm'
 import Model from '../model.entity';
+import { FoodItem } from '../restaurants/foodItem.entity';
 import { User } from '../user/User.entity';
 
 @Entity('cart')
@@ -17,5 +18,15 @@ export class Cart extends Model{
 
     })
     user: User
+
+    @ManyToOne(
+        () => FoodItem, 
+        (fooditem) => fooditem.cart
+    )
+    @JoinColumn({
+        name: 'fooditem'
+
+    })
+    fooditem: FoodItem
 
 }
