@@ -11,7 +11,7 @@ import { SelectedCategory } from '../entities/restaurants/selectedCategory.entit
 import { trandingFood } from '../entities/foods/trandingFood.entity'
 import { User} from '../entities/user/User.entity'
 import { Order } from '../entities/order/Order.entity'
-import { DiscountCoupon } from '../entities/other/coupon.entity'
+import { Coupons } from '../entities/order/coupons.entity'
 
 type configType = {
     host :string;
@@ -51,7 +51,7 @@ export const AppDataSource = new DataSource({
         foodList,
         SelectedCategory,
         trandingFood,
-        DiscountCoupon
+        Coupons
     ],
 })
 
