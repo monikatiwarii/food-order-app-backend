@@ -65,6 +65,19 @@ export const updateCart = async (req) : Promise<IResponse>=> {
     }
 }
 
+export const fetchCartData = async (userId: number): Promise<IResponse> => {
+    const FoodData = await AppDataSource
+    .getRepository(Cart)
+    .createQueryBuilder('cart')
+    // .select('cart')
+    .leftJoinAndSelect("cart.fooditem", "fooditem")
+    // .from(Cart, 'cart')
+    .where("cart.user = :userId", {userId: userId})
+    .getMany()
+    
+    return Success('Cart Data!', FoodData)
+}
+
 const findCartData = async (foodId: number, userId: number) => {
     const FoodData = await AppDataSource
         .createQueryBuilder()
