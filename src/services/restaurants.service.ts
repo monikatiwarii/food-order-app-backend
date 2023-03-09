@@ -151,6 +151,7 @@ export const updateRestaurant = async (req: Request): Promise<IResponse> => {
 
     let fileObj = await CreateFileObj(req);
 
+    console.log('fielOBj :: :: :: ', req.files)
     let param = req.body;
     param = {
       ...param,

@@ -7,6 +7,21 @@ import { IResponse } from "../types/response.type";
 import { Error, Success } from "../utils/restResponse";
 
 
+export const insertFoods = async ()  =>{
+
+  const foodItemRepository = AppDataSource.getRepository(FoodItem)
+
+  foodItem.map(async (data)=>{
+   const foodItems = new FoodItem()
+   foodItems.name = data.name
+   foodItems.description = data.description
+   foodItems.price = data.price
+   foodItems.image = data.image
+   const res = await foodItemRepository.save(foodItems)
+   return res
+  })
+}
+
 export const addFoods = async (bodyData : any): Promise<IResponse> => {
   try {
   
@@ -15,7 +30,6 @@ export const addFoods = async (bodyData : any): Promise<IResponse> => {
     fooditem.name = param.name;
     fooditem.image = param.image;
     fooditem.price = param.price;
-    // fooditem.quantity = param.quantity;
     fooditem.category = param.category;
     fooditem.description = param.description;
     fooditem.restaurants = param.restaurants;

@@ -19,9 +19,10 @@ export const CreateFileObj = async (req: Request) => {
     for (let file in req.files) {
       respObj[file] = {}
       req.files[file].map((val, index) => {
-        respObj[file][index] = val.filename
+        respObj[file][index] = `${folderName}/${val.filename}`
       })
     }
   }
+  console.log('respObj :: :: :: :: :: common :: :: :: ::',respObj)
   return respObj;
 }

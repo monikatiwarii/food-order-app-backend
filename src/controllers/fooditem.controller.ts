@@ -1,8 +1,18 @@
-import {fetchAllFoods,findFoodItemById, addFoods} from '../services/fooditem.service'
+import {fetchAllFoods,findFoodItemById, addFoods, insertFoods} from '../services/fooditem.service'
 import { Request,Response } from "express"
 import { foodItemType } from '../types/foodItem.type'
 import { IResponse } from '../types/response.type'
 
+export const insertFoodItems = async(req : Request,res : Response) =>{
+
+        const foodList  = await insertFoods() 
+        try{
+           res.status(200).send({message : 'food list',data:foodList})
+        }
+        catch(e){
+            res.status(500).send({message : 'server error',data:e})
+        }
+    }
 
 export const addFoodsItem = async(req:Request,res:Response)=>{
     
