@@ -1,6 +1,6 @@
 import express,{Request,Response} from "express"
 import { AppDataSource } from "./utils/data-source"
-import router from './routes/index.route'
+import router from './routes/index.routes'
 import path from 'path'
 import * as fs from 'fs'
 
