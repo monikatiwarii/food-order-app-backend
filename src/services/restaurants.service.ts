@@ -105,6 +105,23 @@ export const fetchAllRestaurants = async (): Promise<IResponse> => {
   }
 }
 
+export const slugWiseRestaurant = async(slug:string)=>{
+
+  const restaurants = await AppDataSource
+      .createQueryBuilder()
+      .select("restaurants")
+      .from(Restaurants, "restaurants")
+      .leftJoinAndSelect("restaurants.category","category")
+      .where("restaurants.slug = :slug", { slug: slug })
+      .getOne()
+
+      if (!restaurants)
+        return Error('No Restaurant Found!', [], 404)
+      else
+        return Success('Restaurant List!', restaurants)
+} 
+
+
 export const findRestaurantsById = async (id: string): Promise<IResponse> => {
 
   try {
@@ -129,8 +146,18 @@ export const findRestaurantsById = async (id: string): Promise<IResponse> => {
 
 export const updateRestaurant = async (req: Request): Promise<IResponse> => {
 
+
   try {
-    let param = req.body
+
+    let fileObj = await CreateFileObj(req);
+
+    let param = req.body;
+    param = {
+      ...param,
+      menu: fileObj.menu,
+      images: fileObj.images
+    };
+
     let params = req.params
     const restaurant = await AppDataSource
       .createQueryBuilder()
@@ -160,3 +187,4 @@ export const updateRestaurant = async (req: Request): Promise<IResponse> => {
   }
 
 }
+

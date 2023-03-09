@@ -1,4 +1,4 @@
-import  {addRestaurant,fetchAllRestaurants, findRestaurantsById, getAllRestaurants, updateRestaurant} from '../services/restaurants.service'
+import  {addRestaurant,fetchAllRestaurants, findRestaurantsById, getAllRestaurants, slugWiseRestaurant, updateRestaurant} from '../services/restaurants.service'
 import { Request,Response } from 'express'
 import { restaurantType } from '../types/restaurant.type'
 import { IResponse } from '../types/response.type'
@@ -41,6 +41,19 @@ export const allRestaurantsList = async(req:Request,res:Response)=>{
 
      }
 }
+
+export const slugWiseRestaurantList = async(req:Request,res:Response)=>{
+   
+    try{
+        const restaurant = await slugWiseRestaurant(req.params.slug)
+        res.status(restaurant.code).send(restaurant)
+    }
+    catch(e){
+        console.log(e);
+        return res.status(500).send("SERVER ERROR!")
+
+     }
+} 
 
 export const getOneRestaurant = async(req:Request,res:Response)  =>{
     try{
