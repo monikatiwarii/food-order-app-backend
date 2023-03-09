@@ -1,8 +1,9 @@
-import { addRestaurants,allRestaurantsList,getOneRestaurant, updateRestaurantController } from "../controllers/restaurants.controller";
+import { addRestaurants,allRestaurantsList,getOneRestaurant, getRestaurantList, updateRestaurantController } from "../controllers/restaurants.controller";
 import express from 'express'
 import { MulterUpload } from "../middlewares/multer.middleware";
 const router = express.Router()
 
+router.get('/add',getRestaurantList)
 router.post('/', MulterUpload.fields([
     {
         name: 'images',

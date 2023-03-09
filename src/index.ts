@@ -3,6 +3,7 @@ import { AppDataSource } from "./utils/data-source"
 import router from './routes/index.routes'
 import path from 'path'
 import * as fs from 'fs'
+import cors from "cors"
 
 class Server{
     private app  :express.Application
@@ -15,7 +16,9 @@ class Server{
     }
 
     public configuration(){
+       
 
+        this.app.use(cors())
         this.app.use(express.static(path.join(__dirname, "public")));
         this.app.use(express.static("public"));
     

@@ -1,8 +1,22 @@
-import  {addRestaurant,fetchAllRestaurants, findRestaurantsById, updateRestaurant} from '../services/restaurants.service'
+import  {addRestaurant,fetchAllRestaurants, findRestaurantsById, getAllRestaurants, updateRestaurant} from '../services/restaurants.service'
 import { Request,Response } from 'express'
 import { restaurantType } from '../types/restaurant.type'
 import { IResponse } from '../types/response.type'
+import { restaurants } from '../data/data'
+import { AppDataSource } from '../utils/data-source'
+import { Restaurants } from '../entities/restaurants/restaurants.entity'
 
+
+
+
+export const getRestaurantList = async(req : Request,res : Response)=>{
+    const restaurantList :restaurantType[] = await getAllRestaurants()
+    try{
+        res.status(200).json(restaurantList)
+    }catch(e){
+        res.status(400).json(e.message)
+    }
+}
 
 export const addRestaurants = async(req:Request,res:Response) =>{
     try{

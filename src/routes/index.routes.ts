@@ -13,12 +13,13 @@ const router = express.Router()
 
 router.use('/login',loginRouter)
 
-router.use(verifyToken)
-
 router.use('/category',categoryRoute)
 router.use('/restaurants',restaurantsRoute)
 router.use('/foods',foodRouter)
 router.use('/user',userRouter)
+
+router.use(verifyToken)
+
 router.use('/order',orderRouter)
 router.use('/cart', cart)
 router.use('/checkout', checkOut)

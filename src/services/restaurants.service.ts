@@ -6,7 +6,28 @@ import { Category } from "../entities/restaurants/category.entity"
 import { categoryType } from "../types/category.type"
 import { CreateFileObj } from "../controllers/common.controller"
 import { IResponse } from "../types/response.type"
+import { restaurants } from "../data/data"
 
+
+export const getAllRestaurants = async() : Promise<any> =>{
+
+  const restaurantRepository = AppDataSource.getRepository(Restaurants)
+
+  restaurants.map(async(data)=>{
+      const restaurants = new Restaurants()
+      restaurants.name = data.name
+      restaurants.address = data.address
+      restaurants.price = data.averageCost
+      restaurants.slug=data.slug
+      restaurants.time = data.time
+      restaurants.images = data.image
+
+    const res =   await restaurantRepository.save(restaurants)
+      console.log('res---------------------',res)
+      return res
+  })
+
+}
 
 export const addRestaurant = async (req: Request): Promise<IResponse> => {
 
@@ -68,7 +89,9 @@ export const fetchAllRestaurants = async (): Promise<IResponse> => {
       .getRepository(Restaurants)
       .createQueryBuilder("restaurant")
       .select("restaurant")
+      .orderBy("restaurant.id")
       .getMany()
+      
 
     if (!restaurants)
       return Error('No Category Found!', [], 404)

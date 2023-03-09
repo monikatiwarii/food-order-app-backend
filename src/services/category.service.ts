@@ -4,7 +4,24 @@ import { categoryType } from "../types/category.type";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 import { IResponse } from "../types/response.type";
+import { category } from "../data/data";
 
+
+export const getAllCategory = async() : Promise<any> =>{
+
+    const categoryRepository = AppDataSource.getRepository(Category)
+
+    //data insert into table on api call
+
+    category.map(async(cat)=>{
+        const category = new Category()
+        category.name = cat.name
+
+        const res= await categoryRepository.save(category)
+        console.log("res : ",res);
+
+    })
+}
 
 export const addCategory = async(bodyData : any) : Promise<IResponse> =>{
 
