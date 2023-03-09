@@ -7,13 +7,13 @@ import loginRouter from '../routes/login.route'
 import cart from '../routes/cart.routes'
 import * as express from 'express'
 import checkOut from '../routes/checkout.routes'
-// import { verifyToken } from '../utils/jwt'
+import { verifyToken } from '../utils/jwt'
 
 const router = express.Router()
 
 router.use('/login',loginRouter)
 
-// router.use(verifyToken)
+router.use(verifyToken)
 
 router.use('/category',categoryRoute)
 router.use('/restaurants',restaurantsRoute)
