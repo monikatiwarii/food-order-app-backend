@@ -1,11 +1,9 @@
-import { InsertResult } from "typeorm";
-import { category } from "../data/data";
+
 import { Category } from "../entities/restaurants/category.entity";
 import { categoryType } from "../types/category.type";
 import { AppDataSource } from "../utils/data-source";
-import { Request,Response } from "express";
 import { Error, Success } from "../utils/restResponse";
-import { IRespObj, IResponse } from "../types/response.type";
+import { IResponse } from "../types/response.type";
 
 
 export const addCategory = async(bodyData : any) : Promise<IResponse> =>{

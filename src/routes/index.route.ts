@@ -4,6 +4,7 @@ import foodRouter from '../routes/fooditem.route'
 import userRouter from '../routes/user.router'
 import orderRouter from '../routes/order.route'
 import loginRouter from '../routes/login.route'
+import cartRouter from '../routes/cart.route'
 import * as express from 'express'
 import { verifyToken } from '../utils/jwt'
 
@@ -18,5 +19,6 @@ router.use('/restaurants',restaurantsRoute)
 router.use('/foods',foodRouter)
 router.use('/user',userRouter)
 router.use('/order',orderRouter)
+router.use('/cart',cartRouter)
 
 export default router

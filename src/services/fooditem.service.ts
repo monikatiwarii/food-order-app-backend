@@ -15,7 +15,7 @@ export const addFoods = async (bodyData : any): Promise<IResponse> => {
     fooditem.name = param.name;
     fooditem.image = param.image;
     fooditem.price = param.price;
-    fooditem.quantity = param.quantity;
+    // fooditem.quantity = param.quantity;
     fooditem.category = param.category;
     fooditem.description = param.description;
     fooditem.restaurants = param.restaurants;

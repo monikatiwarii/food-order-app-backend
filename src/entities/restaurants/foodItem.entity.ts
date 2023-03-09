@@ -1,5 +1,6 @@
 import {Entity,Column, ManyToOne, ManyToMany, JoinTable} from "typeorm"
 import Model from "../model.entity";
+import { Cart } from "../order/Cart.entity";
 import { Order } from "../order/Order.entity";
 
 import { Category } from "./category.entity";
@@ -21,10 +22,6 @@ export class FoodItem extends Model {
     @Column()
     image : string;
 
-    @Column({
-        default : 0
-    })
-    quantity : number
 
     @ManyToOne(type => Category,category => category.fooditem)
     category : Category
@@ -32,9 +29,8 @@ export class FoodItem extends Model {
     @ManyToOne(type => Restaurants,restaurants => restaurants.fooditem)
     restaurants : Restaurants
 
-    @ManyToMany(()=>Order)
-    @JoinTable({
-        name : 'fooditem_order'
-    })
-    order : Order[]
+    @ManyToOne(type => Cart,cart => cart.fooditem)
+    cart : Cart
+
+   
 }

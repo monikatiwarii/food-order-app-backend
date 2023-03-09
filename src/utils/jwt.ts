@@ -9,8 +9,12 @@ export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
         token = token.split(' ')[1]
         jwt.verify(token, jwtKey, (err, data) => {
     
-          if (err) res.status(401).send('Provide valid token');
-          else next();
+          if (err) return res.status(401).send('Provide valid token');
+          else {
+            req['user_id'] = data['user_id']
+            next();
+            
+          } 
         })
       } else {
         res.status(403).send('Add token with header');
