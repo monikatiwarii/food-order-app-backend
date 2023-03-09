@@ -1,4 +1,5 @@
-import { Entity,BaseEntity,Column,ManyToOne } from "typeorm";
+import { Entity,BaseEntity,Column,PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Cart } from "../cart/Cart.entity";
 import Model from "../model.entity";
 import { Cart } from "../order/Cart.entity";
 import {Order} from '../order/Order.entity'
@@ -15,9 +16,15 @@ export class User extends Model{
     @Column()
     password : string
 
-    @ManyToOne(type => Order,order => order.user)
-    order : Order
+    @OneToMany(
+        () => Cart,
+        (cart) => cart.user
+    )
+    cart: User[]
 
-    @ManyToOne(type => Cart,cart => cart.user)
-    cart : Cart
+    @OneToMany(
+        () => Order,
+        (order)=> order.user
+    )
+    order: Order[]
 }

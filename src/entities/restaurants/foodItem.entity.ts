@@ -1,4 +1,5 @@
-import {Entity,Column, ManyToOne, ManyToMany, JoinTable} from "typeorm"
+import {Entity,Column, ManyToOne, ManyToMany, JoinTable, OneToMany} from "typeorm"
+import { Cart } from "../cart/Cart.entity";
 import Model from "../model.entity";
 import { Cart } from "../order/Cart.entity";
 import { Order } from "../order/Order.entity";
@@ -29,8 +30,15 @@ export class FoodItem extends Model {
     @ManyToOne(type => Restaurants,restaurants => restaurants.fooditem)
     restaurants : Restaurants
 
-    @ManyToOne(type => Cart,cart => cart.fooditem)
-    cart : Cart
+    @ManyToMany(()=>Order)
+    @JoinTable({
+        name : 'fooditem_order'
+    })
+    order : Order[]
 
-   
+    @OneToMany(
+        () => Cart,
+        (cart) => cart.fooditem
+    )
+    cart: Cart[]
 }

@@ -1,4 +1,4 @@
-import { Entity,Column,ManyToMany, ManyToOne, OneToMany } from "typeorm";
+import { Entity,BaseEntity,PrimaryGeneratedColumn,Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToMany, ManyToOne, JoinColumn } from "typeorm";
 import { User } from "../user/User.entity";
 import Model from "../model.entity";
 import { FoodItem } from "../restaurants/foodItem.entity";
@@ -7,18 +7,25 @@ import { OrderDetails } from "./OrderDetails.entity";
 @Entity('order')
 
 export class Order extends Model{
-     
-    @Column({
-        default : 0
-    })
+   
+    @Column()
     total : number
 
-    @OneToMany(
-        type =>  User, user => user.order
+    @ManyToOne(
+        () => User,
+        (user) => user.order,
+        {
+            onDelete: "CASCADE"
+        }
     )
-    user: User[];
+    @JoinColumn({
+        name : "user"
+    })
+    user: User
 
-    @ManyToOne(type => OrderDetails,orderDetail => orderDetail.order)
-    orderDetail: OrderDetails;
-
+    @OneToMany(
+        () => OrderDetails,
+        (order_details) => order_details.order
+    )
+    order_details: OrderDetails[]
 }

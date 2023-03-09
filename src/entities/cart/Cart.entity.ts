@@ -2,23 +2,22 @@ import  {Entity,Column, ManyToOne, JoinColumn } from 'typeorm'
 import Model from '../model.entity';
 import { FoodItem } from '../restaurants/foodItem.entity';
 import { User } from '../user/User.entity';
-import { Order } from './Order.entity';
 
-@Entity('order_details')
+@Entity('cart')
 
-export class OrderDetails extends Model{
+export class Cart extends Model{
     @Column()
     quantity: number
 
     @ManyToOne(
-        () => Order, 
-        (order) => order.order_details
+        () => User, 
+        (user) => user.cart
     )
     @JoinColumn({
-        name: 'order'
+        name: 'user'
 
     })
-    order: Order
+    user: User
 
     @ManyToOne(
         () => FoodItem, 

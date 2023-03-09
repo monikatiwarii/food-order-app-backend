@@ -11,9 +11,9 @@ import { SelectedCategory } from '../entities/restaurants/selectedCategory.entit
 import { trandingFood } from '../entities/foods/trandingFood.entity'
 import { User} from '../entities/user/User.entity'
 import { Order } from '../entities/order/Order.entity'
+import { Coupons } from '../entities/order/coupons.entity'
+import { Cart } from '../entities/cart/Cart.entity'
 import { OrderDetails } from '../entities/order/OrderDetails.entity'
-import { Cart } from '../entities/order/Cart.entity'
-
 
 type configType = {
     host :string;
@@ -32,7 +32,7 @@ const postgresConfig : configType = {
     host : 'localhost',
     port : 5432,
     username : 'postgres',
-    password : '1234',
+    password : 'postgres',
     database:'foodorder'
 }
 
@@ -41,8 +41,23 @@ export const AppDataSource = new DataSource({
     type : 'postgres',
     synchronize : true,
     logging : true,
-    entities : [Restaurants,Category,FoodItem,Order,OrderDetails,Cart,User,FoodItem,RestaurantDescription,foodCollection,foodList,SelectedCategory,trandingFood],
-   
+    entities : [
+        Restaurants,
+        Category,
+        FoodItem,
+        Order,
+        User,
+        FoodItem,
+        RestaurantDescription,
+        foodCollection,
+        foodList,
+        SelectedCategory,
+        trandingFood,
+        Coupons,
+        Cart,
+        Order,
+        OrderDetails
+    ],
 })
 
 

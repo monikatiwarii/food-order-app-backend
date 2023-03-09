@@ -1,15 +1,16 @@
-import { addCartService } from "../services/cart.service";
-import { Request,Response } from "express";
-import { Error } from "../utils/restResponse";
+import { Request, Response } from "express";
+import { IResponse } from "../types/response.type";
+import { updateCart as UC, fetchCartData as FC } from "../services/cart.service";
 
-export const addCartController = async(req:Request,res:Response)=>{
-   
-   try{
-        const addCartData = await addCartService(req)
-        return res.status(addCartData.code).send(addCartData)
-   } 
-   catch(e){
-    console.log(e)
-    return Error(e.message)
-   }
+export const updateCart = async (req: Request, res: Response) => {    
+    let cartData: IResponse = await UC(req)
+    return res.status(cartData.code).send(cartData)
+}
+
+export const fetchCartData = async (req: Request, res: Response) => {    
+    let userId : number = 1
+    // let userId: any = req['user_id']
+    
+    let cartData: IResponse = await FC(userId)
+    return res.status(cartData.code).send(cartData)
 }

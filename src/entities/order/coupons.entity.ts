@@ -2,7 +2,7 @@ import  {Entity,BaseEntity,Column,PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('coupons')
 
-export class coupons extends BaseEntity{
+export class Coupons extends BaseEntity{
     @PrimaryGeneratedColumn()
     id : number
 
