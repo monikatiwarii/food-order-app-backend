@@ -8,8 +8,8 @@ export const updateCart = async (req: Request, res: Response) => {
 }
 
 export const fetchCartData = async (req: Request, res: Response) => {    
-    let userId : number = 1
-    // let userId: any = req['user_id']
+    //let userId : number = 1
+    let userId: any = req['user_id']
     
     let cartData: IResponse = await FC(userId)
     return res.status(cartData.code).send(cartData)
