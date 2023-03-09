@@ -90,6 +90,7 @@ export const fetchAllRestaurants = async (): Promise<IResponse> => {
       .createQueryBuilder("restaurant")
       .select("restaurant")
       .orderBy("restaurant.id")
+      .leftJoinAndSelect("restaurant.category", "category")
       .getMany()
       
 
