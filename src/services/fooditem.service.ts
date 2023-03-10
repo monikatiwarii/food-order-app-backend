@@ -5,6 +5,7 @@ import { AppDataSource } from "../utils/data-source";
 import { Request, Response } from "express";
 import { IResponse } from "../types/response.type";
 import { Error, Success } from "../utils/restResponse";
+import { Category } from "../entities/restaurants/category.entity";
 
 
 export const insertFoods = async ()  =>{
@@ -60,6 +61,29 @@ export const fetchAllFoods = async () : Promise<IResponse> => {
           return Success('Food Lists!', allFoods)
 
   } catch (e) {
+    console.log(e)
+    return Error(e.message)
+  }
+}
+
+export const categoryWiseFoods = async(req:Request):Promise<IResponse> =>{
+  try {
+
+    const fooditem = await AppDataSource
+      .createQueryBuilder()
+      .select(["fooditem"])
+      .from(FoodItem, "fooditem")
+      .leftJoin("fooditem.category","category")
+      .leftJoin("fooditem.restaurants","restaurants")  
+      .where("fooditem.restaurantsId = :rid",{rid:parseInt(req.params.rId)})
+      .andWhere("fooditem.categoryId = :id", { id: req.params.cId })
+      .getRawMany()
+
+      if(!fooditem) 
+        return Error('No FoodItem Found!', [], 404)
+      else
+        return Success('Food Lists!', fooditem)
+  }catch (e) {
     console.log(e)
     return Error(e.message)
   }

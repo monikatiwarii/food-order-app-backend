@@ -45,7 +45,7 @@ export const allRestaurantsList = async(req:Request,res:Response)=>{
 export const slugWiseRestaurantList = async(req:Request,res:Response)=>{
    
     try{
-        const restaurant = await slugWiseRestaurant(req.params.slug)
+        const restaurant = await slugWiseRestaurant(req.params.slug)      
         res.status(restaurant.code).send(restaurant)
     }
     catch(e){
