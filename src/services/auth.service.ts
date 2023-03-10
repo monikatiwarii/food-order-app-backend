@@ -5,8 +5,9 @@ import { Error, Success } from "../utils/restResponse";
 import jwt from "jsonwebtoken";
 import { IResponse } from "../types/response.type";
 const jwtKey = "food_order_key"//process.env.JWT_SECRET_KEY;
-export const loginService = async (userCredential: any) : Promise<IResponse> => {
 
+export const loginService = async (userCredential: any) : Promise<IResponse> => {
+    
     try {
         const userData: any = await AppDataSource
             .getRepository(User)
@@ -16,8 +17,7 @@ export const loginService = async (userCredential: any) : Promise<IResponse> => 
                     password: userCredential.password
                 }
             })
-
-        if (userData) {
+        if (!!userData) {
             let token  = jwt.sign(
                 {
                     user_id : userData['id']
@@ -29,7 +29,7 @@ export const loginService = async (userCredential: any) : Promise<IResponse> => 
             )
             return Success('Login Successfull!', {token})
         } else {
-            Error('Login Credentials are invalid!', [], 401)
+            return Error('Login Credentials are invalid!', [], 401)
         }
     }
     catch (e) {

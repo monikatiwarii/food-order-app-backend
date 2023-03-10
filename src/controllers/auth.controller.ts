@@ -5,7 +5,7 @@ import { Success } from "../utils/restResponse";
 export const loginController = async(req:Request,res:Response)=>{
     try{
         const login = await loginService(req.body)
-
+      
         return res.status(login.code).send(login)
     }
     catch(e){

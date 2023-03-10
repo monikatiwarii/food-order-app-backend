@@ -5,6 +5,7 @@ const jwtKey = "food_order_key"//process.env.JWT_SECRET_KEY;
 export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
 
     let token = req.headers['authorization'];
+
     if (token) {
         token = token.split(' ')[1]
         jwt.verify(token, jwtKey, (err, data) => {

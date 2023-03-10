@@ -20,8 +20,8 @@ router.use('/user',userRouter)
 
 router.use(verifyToken)
 
-router.use('/order',orderRouter)
 router.use('/cart', cart)
+router.use('/order',orderRouter)
 router.use('/checkout', checkOut)
 
 
