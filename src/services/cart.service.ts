@@ -16,7 +16,7 @@ export const updateCart = async (req:any) : Promise<IResponse>=> {
         if(!FoodData){
             let CartDataValue = {
                 quantity: 1,
-                fooditem: foodItemId,
+                      fooditem: foodItemId,
                 user: userId
             }   
             returnUpdatedValue = await AppDataSource
