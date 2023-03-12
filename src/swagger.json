@@ -199,6 +199,37 @@
                     }
                 }
             }
+        },
+        "/cart": {
+            "get": {
+                "tags": ["Cart"],
+                "summary": "To get all Food Item",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Cart"],
+                "summary": "To Add/Remove Cart Data",
+                "requestBody": {
+                    "description": "Add/Remove Cart Data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/createCartData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -297,6 +328,25 @@
                 },
                 "restaurants": {
                     "type": "number",
+                    "required": true
+                }
+            }
+        },
+        "createCartData": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Food Item ID",
+                    "type": "number",
+                    "required": true
+                },
+                "action": {
+                    "title": "Food Item Action",
+                    "type": "number",
+                    "enum": {
+                        "Increment": 0,
+                        "Decrement": 1
+                    },
                     "required": true
                 }
             }
