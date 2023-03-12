@@ -9,6 +9,18 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [{
+        "bearerAuth": []
+    }],
     "servers": [
         {
             "url": "/api/",
