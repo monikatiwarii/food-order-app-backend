@@ -6,6 +6,7 @@ import { Request, Response } from "express";
 import { IResponse } from "../types/response.type";
 import { Error, Success } from "../utils/restResponse";
 import { Category } from "../entities/restaurants/category.entity";
+import { CreateFileObj } from "../controllers/common.controller";
 
 
 export const insertFoods = async ()  =>{
@@ -25,8 +26,10 @@ export const insertFoods = async ()  =>{
 
 export const addFoods = async (bodyData : any): Promise<IResponse> => {
   try {
-  
     let param = bodyData
+    // param.image = CreateFileObj(req)
+    param.image = {}
+
     const fooditem = new FoodItem()
     fooditem.name = param.name;
     fooditem.image = param.image;

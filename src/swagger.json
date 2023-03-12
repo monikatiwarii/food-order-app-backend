@@ -146,6 +146,59 @@
                     }
                 }
             }
+        },
+        "/foods": {
+            "get": {
+                "tags": ["Food Item"],
+                "summary": "To get all Food Item",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Food Item"],
+                "summary": "To Create Food Item",
+                "requestBody": {
+                    "description": "Create Food Item",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/definitions/createFoodItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/foods/{foodId}":{
+            "get": {
+                "tags": ["Food Item"],
+                "summary": "To get Individual Food Item Data",
+                "parameters":[
+                        {
+                            "in": "path",
+                            "name": "foodId",
+                            "description": "Food Item Id",
+                            "required": true,
+                            "schema": {
+                                "type": "number"
+                            }
+                        }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -208,6 +261,44 @@
                     "required": true
                 }
  
+            }
+        },
+        "createFoodItem": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "image": {
+                    "type": "array",
+                    "items": {
+                        "type": "file",
+                        "description": "Multiple File Upload",
+                        "format": "binary"
+                    },
+                    "required": true
+                },
+                "price": {
+                    "type": "number",
+                    "required": true
+                },
+                "quantity": {
+                    "type": "number",
+                    "required": true
+                },
+                "description": {
+                    "type": "string",
+                    "required": true
+                },
+                "category": {
+                    "type": "number",
+                    "required": true
+                },
+                "restaurants": {
+                    "type": "number",
+                    "required": true
+                }
             }
         }
     }
