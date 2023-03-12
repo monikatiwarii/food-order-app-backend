@@ -5,6 +5,7 @@ import userRouter from './user.routers'
 import orderRouter from './order.routes'
 import loginRouter from './login.routes'
 import cart from './cart.routes'
+import coupon from './coupon.routes'
 import restaurantDetails from './restaurantDetails.routes'
 import * as express from 'express'
 import checkOut from './checkout.routes'
@@ -22,6 +23,7 @@ router.use('/res',restaurantDetails)
 router.use(verifyToken)
 
 router.use('/cart', cart)
+router.use('/coupons', coupon)
 router.use('/order',orderRouter)
 router.use('/checkout', checkOut)
 
