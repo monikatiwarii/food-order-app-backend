@@ -8,6 +8,7 @@ export const fetchSelectedCategory = async() : Promise<IResponse> =>{
         const category   = await AppDataSource.getRepository(SelectedCategory)
         .createQueryBuilder("selCategory")
         .select("selCategory")
+        .orderBy("selCategory.id")
         .getMany()
 
         if(!category)

@@ -53,8 +53,10 @@ export const fetchAllFoods = async () : Promise<IResponse> => {
       .getRepository(FoodItem)
       .createQueryBuilder("fooditem")
       .select("fooditem")
+      .leftJoin("fooditem.category","category")
       .getMany()
 
+      console.log('alll foooddsss---------------',allFoods)
       if(!allFoods)
             return Error('No FoodItem Found!', [], 404)
         else
@@ -68,7 +70,6 @@ export const fetchAllFoods = async () : Promise<IResponse> => {
 
 export const categoryWiseFoods = async(req:Request):Promise<IResponse> =>{
   try {
-
     const fooditem = await AppDataSource
       .createQueryBuilder()
       .select(["fooditem"])
