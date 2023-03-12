@@ -1,0 +1,454 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "livelyt-be-test",
+        "description": "A simple Cute website",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [{
+        "bearerAuth": []
+    }],
+    "servers": [
+        {
+            "url": "/api/",
+            "description": "to use routers"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Food Order App",
+            "description": "API for Food Order App"
+        }
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/category": {
+            "get": {
+                "tags": ["Category"],
+                "summary": "To get all Categories",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Category"],
+                "summary": "To Create Category",
+                "requestBody": {
+                    "description": "Create Category",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/createCategory"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/category/{categoryId}":{
+            "get": {
+                "tags": ["Category"],
+                "summary": "To get Individual category Data",
+                "parameters":[
+                        {
+                            "in": "path",
+                            "name": "categoryId",
+                            "description": "category Id",
+                            "required": true,
+                            "schema": {
+                                "type": "number"
+                            }
+                        }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/restaurants": {
+            "get": {
+                "tags": ["Restaurant"],
+                "summary": "To get all Restaurant",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Restaurant"],
+                "summary": "To Create Restaurant",
+                "requestBody": {
+                    "description": "Create Restaurant",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/definitions/createRestaurant"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/restaurants/{restaurantId}":{
+            "get": {
+                "tags": ["Restaurant"],
+                "summary": "To get Individual Restaurant Data",
+                "parameters":[
+                        {
+                            "in": "path",
+                            "name": "restaurantId",
+                            "description": "Restaurant Id",
+                            "required": true,
+                            "schema": {
+                                "type": "number"
+                            }
+                        }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/foods": {
+            "get": {
+                "tags": ["Food Item"],
+                "summary": "To get all Food Item",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Food Item"],
+                "summary": "To Create Food Item",
+                "requestBody": {
+                    "description": "Create Food Item",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/definitions/createFoodItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/foods/{foodId}":{
+            "get": {
+                "tags": ["Food Item"],
+                "summary": "To get Individual Food Item Data",
+                "parameters":[
+                        {
+                            "in": "path",
+                            "name": "foodId",
+                            "description": "Food Item Id",
+                            "required": true,
+                            "schema": {
+                                "type": "number"
+                            }
+                        }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/cart": {
+            "get": {
+                "tags": ["Cart"],
+                "summary": "To get all Food Item",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Cart"],
+                "summary": "To Add/Remove Cart Data",
+                "requestBody": {
+                    "description": "Add/Remove Cart Data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/createCartData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/coupons": {
+            "post": {
+                "tags": ["Coupons"],
+                "summary": "To Create Coupons",
+                "requestBody": {
+                    "description": "Create Coupons",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/createCouponData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/coupons/{couponValue}": {
+            "get": {
+                "tags": ["Coupons"],
+                "summary": "To Get Coupon Data",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "couponValue",
+                        "description": "Coupon Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Coupons"],
+                "summary": "To Update Coupons",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "couponValue",
+                        "description": "Coupon Id",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Coupons",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/createCouponData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "createCategory": {
+            "type": "object",
+            "properties": {
+                "name":{
+                    "type": "string",
+                    "required": true
+                },
+                "restaurants":{
+                    "type": "number",
+                    "required": true
+                }
+            }
+        },
+        "createRestaurant": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "address": {
+                    "type": "string",
+                    "required": true
+                },
+                "time": {
+                    "type": "string",
+                    "required": true
+                },
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "price": {
+                    "type": "number",
+                    "required": true
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "type": "file",
+                        "description": "Multiple File Upload",
+                        "format": "binary"
+                    },
+                    "required": true
+                },
+                "menu": {
+                    "type": "array",
+                    "items": {
+                        "type": "file",
+                        "description": "Multiple File Upload",
+                        "format": "binary"
+                    },
+                    "required": true
+                },
+                "category": {
+                    "type": "string",
+                    "required": true
+                }
+ 
+            }
+        },
+        "createFoodItem": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "image": {
+                    "type": "array",
+                    "items": {
+                        "type": "file",
+                        "description": "Multiple File Upload",
+                        "format": "binary"
+                    },
+                    "required": true
+                },
+                "price": {
+                    "type": "number",
+                    "required": true
+                },
+                "quantity": {
+                    "type": "number",
+                    "required": true
+                },
+                "description": {
+                    "type": "string",
+                    "required": true
+                },
+                "category": {
+                    "type": "number",
+                    "required": true
+                },
+                "restaurants": {
+                    "type": "number",
+                    "required": true
+                }
+            }
+        },
+        "createCartData": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Food Item ID",
+                    "type": "number",
+                    "required": true
+                },
+                "action": {
+                    "title": "Food Item Action",
+                    "type": "number",
+                    "enum": {
+                        "Increment": 0,
+                        "Decrement": 1
+                    },
+                    "required": true
+                }
+            }
+        },
+        "createCouponData": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "name",
+                    "type": "string",
+                    "required": true
+                },
+                "value": {
+                    "title": "value",
+                    "type": "number",
+                    "required": true
+                },
+                "type": {
+                    "title": "Coupon Type",
+                    "type": "string",
+                    "enum": {
+                        "PERCENTAGE": "PERCENTAGE",
+                        "FLAT": "FLAT"
+                    },
+                    "required": true
+                }
+            }
+        }
+    }
+}
