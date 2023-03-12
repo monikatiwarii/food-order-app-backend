@@ -1,6 +1,6 @@
 import { fetchRestaurantDetails } from "../services/restaurantDescription.service"
 import { Request,Response } from "express"
-import { restaurantDescriptionType } from "../types/restaurantImage.type"
+import { restaurantDescriptionType } from "../types/restaurantDescription.type"
 
 export const allRestaurantDetails = async(req:Request,res:Response)=>{
    

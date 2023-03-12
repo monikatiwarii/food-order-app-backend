@@ -1,22 +1,24 @@
+import { foodList } from "../entities/foods/foodList.entity"
 import { RestaurantDescription } from "../entities/restaurants/restaurantDescription.entity"
+import { foodListType } from "../types/foodList.type"
 import { IResponse } from "../types/response.type"
 import { restaurantDescriptionType } from "../types/restaurantDescription.type"
 import { AppDataSource } from "../utils/data-source"
 import { Error, Success } from "../utils/restResponse"
 
-export const fetchRestaurantDetails = async() : Promise<IResponse> =>{
+export const fetchFoodList = async() : Promise<IResponse> =>{
     try{
-        console.log('in fetchRestaurantDetails :: :: :: :: :: ::')
-        const restaurant : restaurantDescriptionType[]  = await AppDataSource.getRepository(RestaurantDescription)
+        
+        const foodlist : foodListType[]  = await AppDataSource.getRepository(foodList)
         .createQueryBuilder("resDescription")
         .select("resDescription")
         .getMany()
-        console.log('in fetchRestaurantDetails :: :: :: :: :: ::', Success('Restaurant List!', restaurant))
+        
 
-        if(!restaurant)
+        if(!foodlist)
             return Error('No detail  Found!', [], 404)
         else
-        return Success('Restaurant List!', restaurant) 
+        return Success('Foods List!', foodlist) 
     }
     catch(e){
         console.log(e)

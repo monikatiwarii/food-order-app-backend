@@ -1,3 +1,3 @@
-export interface userType {
+export interface userDataType {
   isLoggedIn: boolean;
 }

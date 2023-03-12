@@ -1,8 +1,8 @@
 export interface foodListType {
-    id:string,
+    id:number,
     image:string,
     name:string,
-    time:number,
-    price:number,
-    itemCount:number
+    time:string,
+    // price:number,
+    // itemCount:number
 }

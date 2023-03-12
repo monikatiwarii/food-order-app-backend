@@ -6,7 +6,8 @@ import { foodListType } from '../types/foodList.type';
 import { foodtypesType } from '../types/foodtype.type';
 import { menusType } from '../types/menus.type';
 import { restaurantType } from '../types/restaurant.type';
-import { restaurantImageType } from '../types/restaurantImage.type';
+import { restaurantDescriptionType } from '../types/restaurantDescription.type';
+
 import { statesType } from '../types/states.type';
 import { trandingFoodType } from '../types/trandingFoods.type';
 
@@ -29,24 +30,24 @@ export const states: statesType[] = [
   }
 ];
 
-export const restaurantImage: restaurantImageType[] = [
+export const restaurantImage: restaurantDescriptionType[] = [
   {
-    id: 'res1',
+    id: 1,
     image: '/images/Rectangle 9.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   },
   {
-    id: 'res2',
+    id: 2,
     image: '/images/Rectangle 7.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   },
   {
-    id: 'res3',
+    id: 3,
     image: '/images/Rectangle 11.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   }
 ];
 
@@ -821,52 +822,45 @@ export const foodItem: foodItemType[] = [
 
 export const foodList: foodListType[] = [
   {
-    id: 'food1',
+    id: 1,
     image: '/images/Rectangle 15.png',
     name: 'vadapav',
-    time: 20,
-    price: 30,
-    itemCount: 1
+    time: "20",
+
   },
   {
-    id: 'food2',
+    id: 2,
     image: '/images/Rectangle 16.png',
     name: 'panipuri',
-    time: 20,
-    price: 50,
-    itemCount: 1
+    time: "20",
+
   },
   {
-    id: 'food3',
+    id: 3,
     image: '/images/Rectangle 17.png',
     name: 'pav bhaji',
-    time: 20,
-    price: 150,
-    itemCount: 1
+    time: "20",
+  
   },
   {
-    id: 'food4',
+    id: 4,
     image: '/images/Rectangle 18.png',
     name: 'ice-cream',
-    time: 20,
-    price: 70,
-    itemCount: 1
+    time: "20",
+
   },
   {
-    id: 'food5',
+    id: 5,
     image: '/images/Rectangle 19.png',
     name: 'sandwich',
-    time: 20,
-    price: 90,
-    itemCount: 1
+    time: "20",
+   
   },
   {
-    id: 'food6',
+    id: 6,
     image: '/images/Rectangle 20.png',
     name: 'pizza',
-    time: 20,
-    price: 250,
-    itemCount: 1
+    time: "20",
   }
 ];
 
