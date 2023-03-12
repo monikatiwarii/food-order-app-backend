@@ -230,6 +230,81 @@
                     }
                 }
             }
+        },
+        "/coupons": {
+            "post": {
+                "tags": ["Coupons"],
+                "summary": "To Create Coupons",
+                "requestBody": {
+                    "description": "Create Coupons",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/createCouponData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/coupons/{couponValue}": {
+            "get": {
+                "tags": ["Coupons"],
+                "summary": "To Get Coupon Data",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "couponValue",
+                        "description": "Coupon Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Coupons"],
+                "summary": "To Update Coupons",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "couponValue",
+                        "description": "Coupon Id",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Coupons",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/createCouponData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -346,6 +421,30 @@
                     "enum": {
                         "Increment": 0,
                         "Decrement": 1
+                    },
+                    "required": true
+                }
+            }
+        },
+        "createCouponData": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "name",
+                    "type": "string",
+                    "required": true
+                },
+                "value": {
+                    "title": "value",
+                    "type": "number",
+                    "required": true
+                },
+                "type": {
+                    "title": "Coupon Type",
+                    "type": "string",
+                    "enum": {
+                        "PERCENTAGE": "PERCENTAGE",
+                        "FLAT": "FLAT"
                     },
                     "required": true
                 }
