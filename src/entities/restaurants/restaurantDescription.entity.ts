@@ -1,7 +1,7 @@
 import {Entity,Column} from 'typeorm'
 import Model from '../model.entity';
 
-@Entity('RestaurantDescription')
+@Entity('restaurant_description')
 
 export class RestaurantDescription extends Model{
    
