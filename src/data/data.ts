@@ -6,7 +6,8 @@ import { foodListType } from '../types/foodList.type';
 import { foodtypesType } from '../types/foodtype.type';
 import { menusType } from '../types/menus.type';
 import { restaurantType } from '../types/restaurant.type';
-import { restaurantImageType } from '../types/restaurantImage.type';
+import { restaurantDescriptionType } from '../types/restaurantDescription.type';
+
 import { statesType } from '../types/states.type';
 import { trandingFoodType } from '../types/trandingFoods.type';
 
@@ -29,24 +30,24 @@ export const states: statesType[] = [
   }
 ];
 
-export const restaurantImage: restaurantImageType[] = [
+export const restaurantImage: restaurantDescriptionType[] = [
   {
-    id: 'res1',
+    id: 1,
     image: '/images/Rectangle 9.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   },
   {
-    id: 'res2',
+    id: 2,
     image: '/images/Rectangle 7.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   },
   {
-    id: 'res3',
+    id: 3,
     image: '/images/Rectangle 11.png',
     title: 'dinning  out',
-    details: 'Explore curated lists of top restaurants'
+    description: 'Explore curated lists of top restaurants'
   }
 ];
 

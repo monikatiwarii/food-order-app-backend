@@ -1,6 +1,6 @@
 import { RestaurantDescription } from "../entities/restaurants/restaurantDescription.entity"
 import { IResponse } from "../types/response.type"
-import { restaurantDescriptionType } from "../types/restaurantImage.type"
+import { restaurantDescriptionType } from "../types/restaurantDescription.type"
 import { AppDataSource } from "../utils/data-source"
 import { Error, Success } from "../utils/restResponse"
 
@@ -11,7 +11,6 @@ export const fetchRestaurantDetails = async() : Promise<IResponse> =>{
         .select("resDescription")
         .getMany()
 
-        console.log('restaurant details ::: ::: :: :: :: :: ',restaurant)
         if(!restaurant)
             return Error('No detail  Found!', [], 404)
         else
