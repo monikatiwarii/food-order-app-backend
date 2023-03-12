@@ -41,80 +41,10 @@
         "application/json"
     ],
     "paths": {
-        "/product": {
+        "/category": {
             "get": {
-                "tags": ["Product"],
-                "summary": "To get all products",
-                "parameters":[
-                        {
-                            "in": "query",
-                            "name": "category",
-                            "description": "Product Category Id",
-                            "required": false,
-                            "schema": {
-                                "type": "number"
-                            }
-                        },
-                        {
-                            "in": "query",
-                            "name": "subcategory",
-                            "description": "Product SubCategory Id",
-                            "required": false,
-                            "schema": {
-                                "type": "number"
-                            }
-                        },
-                        {
-                            "in": "query",
-                            "name": "brand",
-                            "description": "Product Brand Id",
-                            "required": false,
-                            "schema": {
-                                "type": "string"
-                            }
-                        },
-                        {
-                            "in": "query",
-                            "name": "start_range",
-                            "description": "Product Price Start Range",
-                            "required": false,
-                            "schema": {
-                                "type": "number"
-                            }
-                        },
-                        {
-                            "in": "query",
-                            "name": "end_range",
-                            "description": "Product Price End Range",
-                            "required": false,
-                            "schema": {
-                                "type": "number"
-                            }
-                        },
-                        {
-                            "in": "query",
-                            "name": "sort",
-                            "description": "Sort By",
-                            "required": false,
-                            "schema": {
-                                "type": "enum",
-                                "enum":[
-                                    "most_popular",
-                                    "low_to_high",
-                                    "high_to_low"
-                                ]
-                            }
-                        },
-                        {
-                            "in": "query",
-                            "name": "limit",
-                            "description": "Product list Limit",
-                            "required": false,
-                            "schema": {
-                                "type": "number"
-                            }
-                        }
-                    ],
+                "tags": ["Category"],
+                "summary": "To get all Categories",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -122,20 +52,15 @@
                 }
             },
             "post": {
-                "tags": ["Product"],
-                "summary": "To Create Base Product",
+                "tags": ["Category"],
+                "summary": "To Create Category",
                 "requestBody": {
-                    "description": "Create Base Product",
+                    "description": "Create Category",
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "$ref": "#/definitions/createBaseProduct"
-                            }
-                        },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/definitions/createBaseProduct"
+                                "$ref": "#/definitions/createCategory"
                             }
                         }
                     }
@@ -145,74 +70,18 @@
                         "description": "OK"
                     }
                 }
-            },
-            "patch": {
-                    "tags": ["Product"],
-                    "summary": "To Update Product",
-                    "parameters":[
-                        {
-                            "in": "query",
-                            "name": "productId",
-                            "description": "Product Id",
-                            "required": true,
-                            "schema": {
-                                "type": "number"
-                            }
-                        }
-                    ],
-                    "requestBody": {
-                        "description": "Create Base Product",
-                        "required": true,
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "$ref": "#/definitions/createBaseProduct"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/definitions/createBaseProduct"
-                                }
-                            }
-                        }   
-                    },
-                    "responses": {
-                        "200": {
-                            "description": "OK"
-                        }
-                    }
-            },
-            "delete": {
-                "tags": ["Product"],
-                "summary": "To Delete Product",
-                "parameters":[
-                   {
-                        "in": "query",
-                        "name": "productId",
-                        "description": "Product Id",
-                        "required": true,
-                        "schema": {
-                            "type": "number"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
             }
         },
-        "/product/{productId}":{
+        "/category/{categoryId}":{
             "get": {
-                "tags": ["Product"],
-                "summary": "To get Individual product Data",
+                "tags": ["Category"],
+                "summary": "To get Individual category Data",
                 "parameters":[
                         {
                             "in": "path",
-                            "name": "productId",
-                            "description": "Product Id",
-                            "required": false,
+                            "name": "categoryId",
+                            "description": "category Id",
+                            "required": true,
                             "schema": {
                                 "type": "number"
                             }
@@ -225,10 +94,10 @@
                 }
             }
         },
-        "/product_varient": {
+        "/restaurants": {
             "get": {
-                "tags": ["Product Varient"],
-                "summary": "To get all products Varients",
+                "tags": ["Restaurant"],
+                "summary": "To get all Restaurant",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -236,15 +105,15 @@
                 }
             },
             "post": {
-                "tags": ["Product Varient"],
-                "summary": "To Create new Product Varient",
+                "tags": ["Restaurant"],
+                "summary": "To Create Restaurant",
                 "requestBody": {
-                    "description": "Create Product Varient",
+                    "description": "Create Restaurant",
                     "required": true,
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/definitions/createProductVarient"
+                                "$ref": "#/definitions/createRestaurant"
                             }
                         }
                     }
@@ -254,52 +123,23 @@
                         "description": "OK"
                     }
                 }
-            },
-            "patch": {
-                    "tags": ["Product Varient"],
-                    "summary": "To Update Product Varient",
-                    "parameters":[
+            }
+        },
+        "/restaurants/{restaurantId}":{
+            "get": {
+                "tags": ["Restaurant"],
+                "summary": "To get Individual Restaurant Data",
+                "parameters":[
                         {
-                            "in": "query",
-                            "name": "productVarientId",
-                            "description": "Product Varient Id",
+                            "in": "path",
+                            "name": "RestaurantId",
+                            "description": "Restaurant Id",
                             "required": true,
                             "schema": {
                                 "type": "number"
                             }
                         }
                     ],
-                    "requestBody": {
-                        "description": "Update Product Varient",
-                        "required": true,
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "$ref": "#/definitions/createProductVarient"
-                                }
-                            }
-                        }   
-                    },
-                    "responses": {
-                        "200": {
-                            "description": "OK"
-                        }
-                    }
-            },
-            "delete": {
-                "tags": ["Product Varient"],
-                "summary": "To Delete Product Varient",
-                "parameters":[
-                   {
-                        "in": "query",
-                        "name": "productVarientId",
-                        "description": "Product Varient Id",
-                        "required": true,
-                        "schema": {
-                            "type": "number"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -309,107 +149,65 @@
         }
     },
     "definitions": {
-        "createBaseProduct": {
+        "createCategory": {
+            "type": "object",
+            "properties": {
+                "name":{
+                    "type": "string",
+                    "required": true
+                },
+                "restaurants":{
+                    "type": "number",
+                    "required": true
+                }
+            }
+        },
+        "createRestaurant": {
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "required": true
                 },
-                "description": {
-                    "type": "string"
+                "address": {
+                    "type": "string",
+                    "required": true
                 },
-                "media": {
+                "time": {
+                    "type": "string",
+                    "required": true
+                },
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "price": {
+                    "type": "number",
+                    "required": true
+                },
+                "images": {
                     "type": "array",
                     "items": {
                         "type": "file",
                         "description": "Multiple File Upload",
                         "format": "binary"
-                    }
+                    },
+                    "required": true
                 },
-                "delivery_time_hour": {
-                    "type": "number"
-                },
-                "discount_percent": {
-                    "type": "number"
-                },
-                "min_order": {
-                    "type": "number"
-                },
-                "max_order": {
-                    "type": "number"
-                },
-                "is_live": {
-                    "type": "boolean"
+                "menu": {
+                    "type": "array",
+                    "items": {
+                        "type": "file",
+                        "description": "Multiple File Upload",
+                        "format": "binary"
+                    },
+                    "required": true
                 },
                 "category": {
-                    "type": "number"
-                },
-                "subcategory": {
-                    "type": "number"
-                },
-                "brand": {
-                    "type": "number"
-                },
-                "product_option": {
-                    "type": "string"
-                },
-                "product_tag":{
-                    "type": "string"
-                }
-            }
-        },
-        "createBaseCategory": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "image": {
-                    "type": "file"
-                },
-                "is_live": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "createProductVarient": {
-            "type": "object",
-            "properties": {
-                "media": {
-                    "type": "array",
-                    "items": {
-                        "type": "file",
-                        "description": "Multiple File Upload",
-                        "format": "binary"
-                    }
-                },
-                "currency": {
                     "type": "string",
-                    "enum": [
-                        "AED"
-                    ]
-                },
-                "internal_cost": {
-                    "type": "number"
-                },
-                "deposite": {
-                    "type": "number"
-                },
-                "out_of_stock":{
-                    "type": "boolean"
-                },
-                "is_live": {
-                    "type": "boolean"
-                },
-                "product": {
-                    "type": "number"
-                },
-                "subscription": {
-                    "type": "string"
-                },
-                "variant_options":{
-                    "type": "string"
+                    "required": true
                 }
+ 
             }
         }
     }
