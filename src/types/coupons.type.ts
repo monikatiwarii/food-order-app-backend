@@ -16,4 +16,11 @@ export enum ECouponTypes {
   "FLAT"= "FLAT"
 }
 
-export type IFindCoupon = {} | null
+export type IFindCouponFnRetValType = IFindCouponFnRetVal | null
+
+export interface IFindCouponFnRetVal {
+  "id": number,
+  "name": string,
+  "type": string,
+  "value": number
+}

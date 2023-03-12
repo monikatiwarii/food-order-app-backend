@@ -3,13 +3,13 @@ import { Success, Error } from "../utils/restResponse"
 import { Request, Response } from "express"
 import { IRespObj, IResponse } from "../types/response.type"
 import { Coupons } from "../entities/order/coupons.entity"
-import { ECouponTypes, IFindCoupon, IParamCoupon } from "../types/coupons.type"
+import { ECouponTypes, IFindCouponFnRetValType, IParamCoupon } from "../types/coupons.type"
 
 export const addCoupon = async (req: Request): Promise<IResponse> => {
   try {
         let param: IParamCoupon = req.body
 
-        let FindCouponData = await findCouponFn(param.name)
+        let FindCouponData: IFindCouponFnRetValType = await findCouponFn(param.name)
 
         if(!!FindCouponData)
             return Error('Coupon with same name already Exists!', [], 409)
@@ -25,7 +25,7 @@ export const addCoupon = async (req: Request): Promise<IResponse> => {
 
 export const fetchCouponData = async (name: string): Promise<IResponse> => {
   try {
-    const findCoupon = await findCouponFn(name)
+    const findCoupon: IFindCouponFnRetValType = await findCouponFn(name)
 
     if (!findCoupon)
       return Error('No Coupon Found!', [], 404)
@@ -42,7 +42,7 @@ export const updateCoupon = async (req: Request): Promise<IResponse> => {
 
         let couponId =  req.params.couponId
 
-        let FindCouponData = await findCouponFn(parseInt(couponId))
+        let FindCouponData: IFindCouponFnRetValType  = await findCouponFn(parseInt(couponId))
 
         if(!FindCouponData)
             return Error('Coupon does not Exists!', [], 409)
@@ -66,7 +66,7 @@ export const updateCoupon = async (req: Request): Promise<IResponse> => {
     }
 }
 
-export const findCouponFn = async (couponVal: string | number): Promise<IFindCoupon> => {
+export const findCouponFn = async (couponVal: string | number): Promise<IFindCouponFnRetValType> => {
 
     let whereString = typeof couponVal === 'string' ? 'name' : 'id'
 

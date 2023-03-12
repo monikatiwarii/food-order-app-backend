@@ -19,7 +19,7 @@ router.use('/restaurants',restaurantsRoute)
 router.use('/foods',foodRouter)
 router.use('/user',userRouter)
 
-// router.use(verifyToken)
+router.use(verifyToken)
 
 router.use('/cart', cart)
 router.use('/coupons', coupon)
