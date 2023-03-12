@@ -5,6 +5,9 @@ import path from 'path'
 import * as fs from 'fs'
 import cors from "cors"
 
+import swaggerUI from 'swagger-ui-express'
+import * as swaggerDocument from './swagger.json'
+
 class Server{
     private app  :express.Application
 
@@ -31,6 +34,7 @@ class Server{
     }
 
     public routes(){
+        this.app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
         this.app.use('/api',router)
         this.app.get("/*",(req:Request,res:Response)=>{
             res.send('Invalid page url')
