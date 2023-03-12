@@ -132,7 +132,7 @@
                 "parameters":[
                         {
                             "in": "path",
-                            "name": "RestaurantId",
+                            "name": "restaurantId",
                             "description": "Restaurant Id",
                             "required": true,
                             "schema": {
