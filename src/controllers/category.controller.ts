@@ -12,7 +12,7 @@ export const getCategoryList = async (req : Request , res : Response)=>{
     try{
         res.status(200).json(categoryList)
     }
-    catch(e:any){
+    catch(e){
         res.status(400).json(e.message)
     }
 }
