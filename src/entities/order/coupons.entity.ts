@@ -1,4 +1,5 @@
 import  {Entity,BaseEntity,Column,PrimaryGeneratedColumn } from 'typeorm'
+import { ECouponTypes } from '../../types/coupons.type';
 
 @Entity('coupons')
 
@@ -9,7 +10,10 @@ export class Coupons extends BaseEntity{
     @Column()
     name : string;
 
-    @Column()
+    @Column({
+        type: 'enum',
+        enum: ECouponTypes
+    })
     type : string
 
     @Column()
