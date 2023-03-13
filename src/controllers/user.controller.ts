@@ -15,39 +15,33 @@ export const addUsers = async(req:Request,res:Response)=>{
 } 
 
 export const allUsers = async(req:Request,res:Response)=>{
-   
     try{
-        const users = await fetchAllUser()
+        const users: IResponse = await fetchAllUser()
         return res.status(users.code).send(users)
     }
     catch(e){
         console.log(e)
         return res.status(500).send("SERVER ERROR")
     }
-   
 }
 
 export const findUser = async(req:Request,res:Response)=>{
-
     try{
-        const user = await findUserById(req.params.id)
-       
+        const user: IResponse = await findUserById(req.params.id)
         return res.status(user.code).send(user)
     }
     catch(e){
-            console.log(e)
-            return res.status(500).send("SERVER ERROR")
-        }
+        console.log(e)
+        return res.status(500).send("SERVER ERROR")
+    }
 }
 
 export const deletedUser = async(req:Request,res:Response)=>{
-
     try{
-        const user = await deleteUser(req.params.id)
+        const user: IResponse = await deleteUser(req.params.id)
         return res.status(user.code).send(user)
-
     }catch(e){
-            console.log(e)
-            return res.status(500).send("SERVER ERROR")
-        }
+        console.log(e)
+        return res.status(500).send("SERVER ERROR")
+    }
 }

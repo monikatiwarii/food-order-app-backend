@@ -10,7 +10,7 @@ import { Repository, Timestamp } from "typeorm"
 import { IParamUpdateRestaurant } from "../types/restaurants"
 
 
-export const getAllRestaurants = async() : Promise<any> =>{
+export const getAllRestaurants = async() : Promise<void> =>{
   const restaurantRepository: Repository<Restaurants> = AppDataSource.getRepository(Restaurants)
   restaurants.map(async(data)=>{
       const restaurants = new Restaurants()

@@ -20,7 +20,7 @@ import { IResponse } from '../types/restResponse'
 export const addCategories = async(req:Request,res:Response)=>{
     try{
         const categoryList: IResponse  = await addCategory(req.body)
-        res.status(categoryList.code).send(categoryList)
+        return res.status(categoryList.code).send(categoryList)
     }
     catch(e){
         console.log(e);
@@ -31,7 +31,6 @@ export const addCategories = async(req:Request,res:Response)=>{
 export const allCategoryList = async(req:Request,res:Response)=>{
     try{
         const allCategory : IResponse = await fecthAllCategory()
-
         return res.status(allCategory.code).send(allCategory)
     }
     catch(e){
@@ -44,7 +43,6 @@ export const allCategoryList = async(req:Request,res:Response)=>{
 export const getOneCategory = async(req:Request,res:Response) =>{
     try{
         const category : IResponse = await findCategoryById(req.params.id)
-
         return res.status(category.code).send(category)
     }
     catch(e){
