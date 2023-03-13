@@ -40,7 +40,7 @@ export const fetchCouponData = async (name: string): Promise<IResponse> => {
 export const updateCoupon = async (req: Request): Promise<IResponse> => {
     try {
 
-        let couponId =  req.params.couponId
+        let couponId: number | string =  req.params.couponId
 
         let FindCouponData: IFindCouponFnRetValType  = await findCouponFn(parseInt(couponId))
 

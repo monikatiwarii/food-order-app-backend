@@ -1,6 +1,8 @@
 import { Cart } from "../entities/cart/Cart.entity";
 import { Order } from "../entities/order/Order.entity";
 import { OrderDetails } from "../entities/order/OrderDetails.entity";
+import { IFetchCartDataType } from "../types/cart";
+import { IParamCheckout } from "../types/checkout";
 import { IFindCouponFnRetValType } from "../types/coupons";
 import { IResponse } from "../types/restResponse";
 import { AppDataSource } from "../utils/data-source";
@@ -10,12 +12,12 @@ import { findCouponFn } from "./coupon.service";
 
 export const checkOut = async (req) : Promise<IResponse> =>  {
     
-    let param = req.body 
-    let userId: any = req.user_id
+    let param: IParamCheckout = req.body 
+    let userId: number = req.user_id
     
     try {
-        let cartData  = await fetchCartData(userId)
-        let sumOfCartData = findSumOfCartData(cartData)
+        let cartData:IFetchCartDataType  = await fetchCartData(userId)
+        let sumOfCartData: number = findSumOfCartData(cartData)
         
         if(cartData.length === 0) 
             return Error('Cart Is already Empty!', [], 404)
@@ -31,20 +33,19 @@ export const checkOut = async (req) : Promise<IResponse> =>  {
         if(sumOfCartData !== param["total"])
             return Error('Invalid total', [], 417)
         
-        // return Error('Dummy Error')
+        let userrId: (() => string) = req.user_id
         const OrderData = await AppDataSource
             .createQueryBuilder()
             .insert()
             .into(Order)
             .values({
-                user: userId,
+                user: userrId,
                 total: sumOfCartData
             })
             .execute()
-            
-        let orderId = OrderData.raw[0].id
+        let orderId: number = OrderData.raw[0].id
 
-        let orderDetailArr = cartData.map(val => {
+        let orderDetailArr: any = cartData.map(val => {
             return {
                 order: orderId,
                 fooditem: val.fooditem.id,
@@ -55,6 +56,7 @@ export const checkOut = async (req) : Promise<IResponse> =>  {
         let orderDetailsData = OrderDetails.create(orderDetailArr)
 
         await OrderDetails.save(orderDetailsData)
+
         await removeCartData(userId)
 
         return Success('Order Placed Successfully!')
@@ -64,20 +66,18 @@ export const checkOut = async (req) : Promise<IResponse> =>  {
     }
 }
 
-export const fetchCartData = async (userId: number): Promise<any>=> {
-    const cartData = await AppDataSource
+export const fetchCartData = async (userId: number): Promise<IFetchCartDataType>=> {
+    const cartData:IFetchCartDataType = await AppDataSource
     .getRepository(Cart)
     .createQueryBuilder('cart')
     .leftJoinAndSelect("cart.fooditem", "fooditem")
     .where("cart.user = :userId", {userId: userId})
     .getMany()
-    
     return cartData
 }
 
 export const countDiscount = (couponData: IFindCouponFnRetValType, paramTotal: number): number => {
-
-    let returnValue = 0
+    let returnValue: number = 0
 
     if(couponData.type === 'FLAT'){
         returnValue = paramTotal - couponData.value
