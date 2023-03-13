@@ -1,6 +1,5 @@
-import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 import { Cart } from "../entities/cart/Cart.entity";
-import { IAddToCart, ICartData, ICartRetUpdatedValueType, IFetchCartDataType, IFindCartDataType, IGetFoodItem } from "../types/cart";
+import { IAddToCart, ICartRetUpdatedValueType, IFetchCartDataType, IFindCartDataType } from "../types/cart";
 import { IResponse } from "../types/restResponse";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
