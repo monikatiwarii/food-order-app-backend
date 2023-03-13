@@ -4,7 +4,7 @@ import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 import jwt from "jsonwebtoken";
 import { IResponse } from "../types/restResponse";
-import { userType } from "../types/user.type";
+import { userType } from "../types/user.d";
 import { IUserData } from "../types/auth";
 const jwtKey = "food_order_key"//process.env.JWT_SECRET_KEY;
 

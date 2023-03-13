@@ -1,18 +1,16 @@
 import {User} from '../entities/user/User.entity'
 import { AppDataSource } from '../utils/data-source'
-import { Request,Response } from 'express'
 import { IResponse } from '../types/restResponse'
 import { Error, Success } from '../utils/restResponse'
-
+import { IFetchAllUsersType, IParamAddUser } from '../types/user'
 
 export const addUser = async(bodyData : any): Promise<IResponse>  =>{
     try{
 
-        let param  = bodyData
+        let param: IParamAddUser = bodyData
         const user = new User()
         user.email = param.email
         user.password = param.password
-
         await User.save(user)
         return Success('User Added!', user) 
     }
@@ -24,11 +22,11 @@ export const addUser = async(bodyData : any): Promise<IResponse>  =>{
 
 export const fetchAllUser = async() : Promise<IResponse> =>{
     try{
-        const users = AppDataSource.getRepository(User)
+        const users: User[] = await AppDataSource.getRepository(User)
         .createQueryBuilder("users")
         .select("users")
         .getMany()
-
+        
         if(!users)
             return Error('No User Found!', [], 404)
         else
@@ -42,7 +40,7 @@ export const fetchAllUser = async() : Promise<IResponse> =>{
 
 export const findUserById = async(id:string) : Promise<IResponse>=>{
     try{
-        const user = await AppDataSource
+        const user: User = await AppDataSource
         .createQueryBuilder()
         .select("user")
         .from(User,"user")
@@ -65,19 +63,19 @@ export const findUserById = async(id:string) : Promise<IResponse>=>{
 export const deleteUser = async(id:string) : Promise<IResponse> =>{
  
  try{
-    const userData = await findUserById(id)
+    const userData: IResponse = await findUserById(id)
    
-    if(!userData){
+    if(!userData.success){
         return Error('No User Found!', [], 404)
     }
     else{
-        const user  = await AppDataSource
-        .getRepository(User)
-        .createQueryBuilder('users')
-        .delete()
-        .from(User)
-        .where("id = :id", { id: parseInt(id) })
-        .execute()
+        await AppDataSource
+            .getRepository(User)
+            .createQueryBuilder('users')
+            .delete()
+            .from(User)
+            .where("id = :id", { id: parseInt(id) })
+            .execute()
     
         return Success('User Deleted!') 
     }
