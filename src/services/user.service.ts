@@ -8,9 +8,10 @@ export const addUser = async(bodyData : any): Promise<IResponse>  =>{
     try{
 
         let param: IParamAddUser = bodyData
-        const user = new User()
-        user.email = param.email
-        user.password = param.password
+
+        const user: User = new User()
+            user.email = param.email
+            user.password = param.password
         await User.save(user)
         return Success('User Added!', user) 
     }
