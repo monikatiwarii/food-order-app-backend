@@ -3,30 +3,31 @@ import { AppDataSource } from "../utils/data-source"
 import { Success, Error } from "../utils/restResponse"
 import { Request, Response } from "express"
 import { Category } from "../entities/restaurants/category.entity"
-import { categoryType } from "../types/category.type"
 import { CreateFileObj } from "../controllers/common.controller"
 import { IResponse } from "../types/restResponse"
 import { restaurants } from "../data/data"
+import { Repository, Timestamp } from "typeorm"
+import { IParamUpdateRestaurant } from "../types/restaurants"
 
 
-export const getAllRestaurants = async() : Promise<any> =>{
+export const getAllRestaurants = async() : Promise<IResponse> =>{
+  // NO USABLE CODE
+  // const restaurantRepository: Repository<Restaurants> = AppDataSource.getRepository(Restaurants)
 
-  const restaurantRepository = AppDataSource.getRepository(Restaurants)
+  // restaurants.map(async(data)=>{
+  //     const restaurants = new Restaurants()
+  //     restaurants.name = data.name
+  //     restaurants.address = data.address
+  //     restaurants.price = data.averageCost
+  //     restaurants.slug=data.slug
+  //     restaurants.time = data.time
+  //     restaurants.images = data.image
 
-  restaurants.map(async(data)=>{
-      const restaurants = new Restaurants()
-      restaurants.name = data.name
-      restaurants.address = data.address
-      restaurants.price = data.averageCost
-      restaurants.slug=data.slug
-      restaurants.time = data.time
-      restaurants.images = data.image
-
-    const res =   await restaurantRepository.save(restaurants)
-      console.log('res---------------------',res)
-      return res
-  })
-
+  //   const res =   await restaurantRepository.save(restaurants)
+  //     console.log('res---------------------',res)
+  //     return res
+  // })
+  return Success('',{})
 }
 
 export const addRestaurant = async (req: Request): Promise<IResponse> => {
@@ -34,13 +35,13 @@ export const addRestaurant = async (req: Request): Promise<IResponse> => {
   try {
     let fileObj = await CreateFileObj(req);
 
-    let param = req.body;
+    let param: IParamUpdateRestaurant = req.body;
     param = {
       ...param,
       menu: fileObj.menu,
       images: fileObj.images
     };
-    const findCategory = await AppDataSource
+    const findCategory: Restaurants = await AppDataSource
       .createQueryBuilder()
       .select("restaurants")
       .from(Restaurants, "restaurants")
@@ -52,29 +53,28 @@ export const addRestaurant = async (req: Request): Promise<IResponse> => {
     }
     else {
 
-      const categoryData = Category.create(JSON.parse(req.body.category))
-      const categories: any = await Category.createQueryBuilder()
+      const categoryData: Category[] = Category.create(JSON.parse(req.body.category))
+      await Category.createQueryBuilder()
         .insert()
         .into(Category)
         .values(categoryData)
         .orUpdate(['name'], ['name'])
         .execute();
 
-      const restaurantData = new Restaurants();
-      restaurantData.name = param.name;
-      restaurantData.images = param.images;
-      restaurantData.time = param.time;
-      restaurantData.address = param.address;
-      restaurantData.slug = param.slug;
-      restaurantData.price = param.price;
-      restaurantData.menu = param.menu
-      restaurantData.category = categoryData;
+      const restaurantData: Restaurants = new Restaurants();
+        restaurantData.name = param.name;
+        restaurantData.images = param.images;
+        restaurantData.time = param.time;
+        restaurantData.address = param.address;
+        restaurantData.slug = param.slug;
+        restaurantData.price = param.price;
+        restaurantData.menu = param.menu
+        restaurantData.category = categoryData;
 
       await Restaurants.save(restaurantData);
 
       return Success('Restaurant Added!', restaurantData)
     }
-
   }
   catch (e) {
     console.log(e)
@@ -85,7 +85,7 @@ export const addRestaurant = async (req: Request): Promise<IResponse> => {
 
 export const fetchAllRestaurants = async (): Promise<IResponse> => {
   try {
-    const restaurants = await AppDataSource
+    const restaurants: Restaurants[] = await AppDataSource
       .getRepository(Restaurants)
       .createQueryBuilder("restaurant")
       .select("restaurant")
@@ -93,7 +93,6 @@ export const fetchAllRestaurants = async (): Promise<IResponse> => {
       .leftJoinAndSelect("restaurant.category", "category")
       .getMany()
       
-
     if (!restaurants)
       return Error('No Category Found!', [], 404)
     else
@@ -107,7 +106,7 @@ export const fetchAllRestaurants = async (): Promise<IResponse> => {
 
 export const slugWiseRestaurant = async(slug:string)=>{
 
-  const restaurants = await AppDataSource
+  const restaurants: Restaurants = await AppDataSource
       .createQueryBuilder()
       .select("restaurants")
       .from(Restaurants, "restaurants")
@@ -125,7 +124,7 @@ export const slugWiseRestaurant = async(slug:string)=>{
 export const findRestaurantsById = async (id: string): Promise<IResponse> => {
 
   try {
-    const findRestaurants = await AppDataSource
+    const findRestaurants: Restaurants = await AppDataSource
       .createQueryBuilder()
       .select("restaurants")
       .from(Restaurants, "restaurants")
@@ -145,14 +144,12 @@ export const findRestaurantsById = async (id: string): Promise<IResponse> => {
 }
 
 export const updateRestaurant = async (req: Request): Promise<IResponse> => {
-
-
   try {
 
     let fileObj = await CreateFileObj(req);
 
-    console.log('fielOBj :: :: :: ', req.files)
-    let param = req.body;
+    let param:IParamUpdateRestaurant = req.body;
+    
     param = {
       ...param,
       menu: fileObj.menu,
@@ -180,12 +177,10 @@ export const updateRestaurant = async (req: Request): Promise<IResponse> => {
       return Error('No Restaurant Found!', [], 404)
     else
       return Success('Restaurant Updated!', restaurant)
-
   }
   catch (e) {
     console.log(e)
     return Error(e.message)
   }
-
 }
 
