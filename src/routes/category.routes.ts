@@ -1,10 +1,10 @@
-import {addCategories, allCategoryList,getCategoryList,getOneCategory } from "../controllers/category.controller";
+import {addCategories, allCategoryList,getOneCategory } from "../controllers/category.controller";
 import express from 'express'
 
 const router = express.Router()
 
 router.post('/', addCategories)
-      .get('/add',getCategoryList)
+      // .get('/add',getCategoryList)
       .get('/', allCategoryList)
       .get('/:id', getOneCategory)
       

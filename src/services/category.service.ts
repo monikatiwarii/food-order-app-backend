@@ -1,34 +1,29 @@
 
 import { Category } from "../entities/restaurants/category.entity";
-import { categoryType } from "../types/category.type";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 import { IResponse } from "../types/restResponse";
-import { category } from "../data/data";
+// import { category } from "../data/data";
+// import { Repository } from "typeorm/repository/Repository";
 
+// export const getAllCategory = async() : Promise<any> =>{
 
-export const getAllCategory = async() : Promise<any> =>{
+//     const categoryRepository: Repository<Category> = AppDataSource.getRepository(Category)
 
-    const categoryRepository = AppDataSource.getRepository(Category)
+//     category.map(async(cat)=>{
+//         const category: Category = new Category()
+//         category.name = cat.name
 
-    //data insert into table on api call
-
-    category.map(async(cat)=>{
-        const category = new Category()
-        category.name = cat.name
-
-        const res= await categoryRepository.save(category)
-        console.log("res : ",res);
-
-    })
-}
+//         const res: Category = await categoryRepository.save(category)
+//     })
+// }
 
 export const addCategory = async(bodyData : any) : Promise<IResponse> =>{
 
     try{
         let param = bodyData
         
-        const findCategory = await AppDataSource
+        const findCategory: Category = await AppDataSource
         .createQueryBuilder()
         .select("category")
         .from(Category,"category")
@@ -39,7 +34,7 @@ export const addCategory = async(bodyData : any) : Promise<IResponse> =>{
            return Error('Category already exist!',[],409)
         }
         else{
-            const category = new Category()
+            const category: Category = new Category()
     
             category.name = param.name;
             
@@ -50,15 +45,12 @@ export const addCategory = async(bodyData : any) : Promise<IResponse> =>{
     catch(e){
         console.log(e)
         return Error(e.message)
-
     }
-   
-
 }
 
 export const fecthAllCategory = async() : Promise<IResponse> =>{
     try{
-        const findAllCategories = await AppDataSource
+        const findAllCategories: Category[] = await AppDataSource
         .getRepository(Category)
         .createQueryBuilder("category")
         .select("category")
@@ -77,7 +69,7 @@ export const fecthAllCategory = async() : Promise<IResponse> =>{
 
 export const findCategoryById = async(id:string)=>{
     try{
-        const findCategory = await AppDataSource
+        const findCategory: Category = await AppDataSource
         .createQueryBuilder()
         .select("category")
         .from(Category,"category")

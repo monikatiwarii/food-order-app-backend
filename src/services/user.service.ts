@@ -2,7 +2,7 @@ import {User} from '../entities/user/User.entity'
 import { AppDataSource } from '../utils/data-source'
 import { IResponse } from '../types/restResponse'
 import { Error, Success } from '../utils/restResponse'
-import { IFetchAllUsersType, IParamAddUser } from '../types/user'
+import { IParamAddUser } from '../types/user'
 
 export const addUser = async(bodyData : any): Promise<IResponse>  =>{
     try{
