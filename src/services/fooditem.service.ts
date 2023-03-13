@@ -114,3 +114,26 @@ export const findFoodItemById = async (id: string): Promise<IResponse> => {
   }
 
 }
+
+// findFoodItemByName
+export const findFoodItemByName = async (name: string): Promise<IResponse> => {
+
+  try {
+    const fooditem = await AppDataSource
+      .createQueryBuilder()
+      .select("fooditem")
+      .from(FoodItem, "fooditem")
+      .where("fooditem.id = :id", { name: name })
+      .getOne()
+
+      if(!fooditem) 
+        return Error('No FoodItem Found!', [], 404)
+      else
+        return Success('Food Lists!', fooditem)
+  }
+  catch (e) {
+    console.log(e)
+    return Error(e.message)
+  }
+
+}

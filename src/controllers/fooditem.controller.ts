@@ -1,4 +1,4 @@
-import {fetchAllFoods,findFoodItemById, addFoods, insertFoods, categoryWiseFoods} from '../services/fooditem.service'
+import {fetchAllFoods,findFoodItemById, addFoods, insertFoods, categoryWiseFoods, findFoodItemByName} from '../services/fooditem.service'
 import { Request,Response } from "express"
 import { foodItemType } from '../types/foodItem.type'
 import { IResponse } from '../types/response.type'
@@ -65,3 +65,16 @@ console.log('in 4 :: :: :: :: :: ')
     }
 }
 
+// getFoodsByName
+export const getFoodsByName =async(req:Request,res:Response) => {
+    console.log('in 5 :: :: :: :: :: ')
+    
+        try{
+            const fooditem = await findFoodItemByName(req.params.name)
+            res.status(fooditem.code).send(fooditem)
+        }
+        catch(e){
+            console.log(e)
+           return res.status(500).send("SERVER ERROR")
+        }
+    }

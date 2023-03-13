@@ -26,7 +26,7 @@ export const loginService = async (userCredential : userType ) : Promise<IRespon
                 }, 
                 jwtKey, 
                 { 
-                    expiresIn: 60 * 60 
+                    expiresIn: '1d'
                 }
             )
             return Success('Login Successfull!', {token})

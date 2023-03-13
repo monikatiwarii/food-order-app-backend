@@ -73,6 +73,7 @@ export const fetchCartData = async (userId: number): Promise<IResponse> => {
     .createQueryBuilder('cart')
     .leftJoinAndSelect("cart.fooditem", "fooditem")
     .where("cart.user = :userId", {userId: userId})
+    .orderBy("cart.id","ASC")
     .getMany()
 
     let total = findSumOfCartData(cartData)
@@ -94,7 +95,13 @@ const findCartData = async (foodId: number, userId: number) => {
 export const findSumOfCartData = (cartData: any[]): number => {
     let sum = 0
     for(let item of cartData){
-        sum += (item["quantity"] * item["fooditem"]["price"])
+        try {
+            sum += (item["quantity"] * item["fooditem"]["price"])
+        } catch (error) {
+            sum = 0
+            break
+        }
+        // sum += (item["quantity"] * item["fooditem"]["price"])
     }
     return sum
 }
