@@ -5,8 +5,11 @@ import { Error, Success } from "../utils/restResponse";
 
 export const updateCart = async (req:any) : Promise<IResponse>=> {
     let param = req.body
+    console.log('req---------------------',req.user_id)
     let foodItemId = param['id']
     let userId = req['user_id']
+
+    console.log('cart ka param-----------------------',param)
 
     const FoodData = await findCartData(foodItemId, userId)
     let returnUpdatedValue: any
@@ -15,7 +18,7 @@ export const updateCart = async (req:any) : Promise<IResponse>=> {
         if(!FoodData){
             let CartDataValue = {
                 quantity: 1,
-                      fooditem: foodItemId,
+                fooditem: foodItemId,
                 user: userId
             }   
             returnUpdatedValue = await AppDataSource

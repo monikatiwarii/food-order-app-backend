@@ -20,13 +20,13 @@ router.use('/restaurants',restaurantsRoute)
 router.use('/foods',foodRouter)
 router.use('/user',userRouter)
 router.use('/res',restaurantDetails)
-router.use(verifyToken)
 
+router.use(verifyToken)
 router.use('/cart', cart)
 router.use('/coupons', coupon)
 router.use('/order',orderRouter)
 router.use('/checkout', checkOut)
-
+    
 
 export default router
 
