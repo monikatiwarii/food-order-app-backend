@@ -1,27 +1,26 @@
+import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 import { Cart } from "../entities/cart/Cart.entity";
-import { IRespObj, IResponse } from "../types/restResponse";
+import { IAddToCart, ICartData, ICartRetUpdatedValueType, IFetchCartDataType, IFindCartDataType, IGetFoodItem } from "../types/cart";
+import { IResponse } from "../types/restResponse";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 
 export const updateCart = async (req:any) : Promise<IResponse>=> {
-    let param = req.body
-    console.log('req---------------------',req.user_id)
+    let param: IAddToCart = req.body
     let foodItemId = param['id']
     let userId = req['user_id']
 
-    console.log('cart ka param-----------------------',param)
-
     const FoodData = await findCartData(foodItemId, userId)
-    let returnUpdatedValue: any
+    let returnUpdatedValue: ICartRetUpdatedValueType
 
     try {
         if(!FoodData){
-            let CartDataValue = {
+            let CartDataValue: any = {
                 quantity: 1,
                 fooditem: foodItemId,
                 user: userId
             }   
-            returnUpdatedValue = await AppDataSource
+            const returnUpdatedValues = await AppDataSource
                 .createQueryBuilder()
                 .insert()
                 .into(Cart)
@@ -29,25 +28,25 @@ export const updateCart = async (req:any) : Promise<IResponse>=> {
                 .returning('*')
                 .execute()
 
-            returnUpdatedValue = returnUpdatedValue.raw
+            returnUpdatedValue = returnUpdatedValues.raw
 
         } else {
             if(FoodData.quantity <= 1 && param['action'] === 0){
-                returnUpdatedValue = await AppDataSource
+                const returnUpdatedValues  = await AppDataSource
                     .createQueryBuilder()
                     .delete()
                     .from(Cart)
                     .where("id = :id", {id: FoodData.id})
                     .returning('*')
                     .execute()
-                returnUpdatedValue = returnUpdatedValue.raw
+                returnUpdatedValue = returnUpdatedValues.raw
                 
             } else {
                 let CartDataValue = {
                     quantity: (param["action"] === 0) ? FoodData.quantity - 1 : FoodData.quantity + 1
                 }
     
-                returnUpdatedValue = await Cart
+                const returnUpdatedValues = await Cart
                     .createQueryBuilder()
                     .update()
                     .set(CartDataValue)
@@ -55,7 +54,7 @@ export const updateCart = async (req:any) : Promise<IResponse>=> {
                     .returning('*')
                     .execute()
 
-                returnUpdatedValue = returnUpdatedValue.raw
+                returnUpdatedValue = returnUpdatedValues.raw
             }
         }
 
@@ -68,7 +67,7 @@ export const updateCart = async (req:any) : Promise<IResponse>=> {
 }
 
 export const fetchCartData = async (userId: number): Promise<IResponse> => {
-    const cartData = await AppDataSource
+    const cartData: IFetchCartDataType = await AppDataSource
     .getRepository(Cart)
     .createQueryBuilder('cart')
     .leftJoinAndSelect("cart.fooditem", "fooditem")
@@ -76,13 +75,13 @@ export const fetchCartData = async (userId: number): Promise<IResponse> => {
     .orderBy("cart.id","ASC")
     .getMany()
 
-    let total = findSumOfCartData(cartData)
+    let total: number = findSumOfCartData(cartData)
 
     return Success('Cart Data!',{ cartData, total})
 }
 
-const findCartData = async (foodId: number, userId: number) => {
-    const FoodData = await AppDataSource
+const findCartData = async (foodId: number, userId: number): Promise<IFindCartDataType> => {
+    const FoodData: IFindCartDataType = await AppDataSource
         .createQueryBuilder()
         .select('cart')
         .from(Cart, 'cart')
@@ -93,7 +92,7 @@ const findCartData = async (foodId: number, userId: number) => {
 }
 
 export const findSumOfCartData = (cartData: any[]): number => {
-    let sum = 0
+    let sum: number = 0
     for(let item of cartData){
         try {
             sum += (item["quantity"] * item["fooditem"]["price"])
@@ -101,7 +100,6 @@ export const findSumOfCartData = (cartData: any[]): number => {
             sum = 0
             break
         }
-        // sum += (item["quantity"] * item["fooditem"]["price"])
     }
     return sum
 }
