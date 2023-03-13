@@ -1,12 +1,9 @@
 import { Request } from "express"
+import { IFileRespObjType } from "../types/common"
 
 
 export const CreateFileObj = async (req: Request) => {
-  interface RespObj {
-    [key: string]: any
-  }
-
-  let respObj: RespObj
+  let respObj: IFileRespObjType
 
   respObj = {}
 
@@ -23,6 +20,5 @@ export const CreateFileObj = async (req: Request) => {
       })
     }
   }
-  console.log('respObj :: :: :: :: :: common :: :: :: ::',respObj)
   return respObj;
 }

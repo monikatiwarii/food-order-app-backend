@@ -10,24 +10,20 @@ import { Repository, Timestamp } from "typeorm"
 import { IParamUpdateRestaurant } from "../types/restaurants"
 
 
-export const getAllRestaurants = async() : Promise<IResponse> =>{
-  // NO USABLE CODE
-  // const restaurantRepository: Repository<Restaurants> = AppDataSource.getRepository(Restaurants)
+export const getAllRestaurants = async() : Promise<any> =>{
+  const restaurantRepository: Repository<Restaurants> = AppDataSource.getRepository(Restaurants)
+  restaurants.map(async(data)=>{
+      const restaurants = new Restaurants()
+      restaurants.name = data.name
+      restaurants.address = data.address
+      restaurants.price = data.averageCost
+      restaurants.slug=data.slug
+      restaurants.time = data.time
+      restaurants.images = data.image
 
-  // restaurants.map(async(data)=>{
-  //     const restaurants = new Restaurants()
-  //     restaurants.name = data.name
-  //     restaurants.address = data.address
-  //     restaurants.price = data.averageCost
-  //     restaurants.slug=data.slug
-  //     restaurants.time = data.time
-  //     restaurants.images = data.image
-
-  //   const res =   await restaurantRepository.save(restaurants)
-  //     console.log('res---------------------',res)
-  //     return res
-  // })
-  return Success('',{})
+    const res = await restaurantRepository.save(restaurants)
+    return res
+  })
 }
 
 export const addRestaurant = async (req: Request): Promise<IResponse> => {
@@ -149,7 +145,7 @@ export const updateRestaurant = async (req: Request): Promise<IResponse> => {
     let fileObj = await CreateFileObj(req);
 
     let param:IParamUpdateRestaurant = req.body;
-    
+
     param = {
       ...param,
       menu: fileObj.menu,
