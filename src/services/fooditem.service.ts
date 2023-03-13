@@ -1,17 +1,17 @@
 import { FoodItem } from "../entities/restaurants/foodItem.entity";
-import { foodItemType } from "../types/foodItem.type";
 import { foodItem } from "../data/data";
 import { AppDataSource } from "../utils/data-source";
-import { Request, Response } from "express";
+import { Request} from "express";
 import { IResponse } from "../types/restResponse";
 import { Error, Success } from "../utils/restResponse";
 import { Category } from "../entities/restaurants/category.entity";
-import { CreateFileObj } from "../controllers/common.controller";
-
+import { Restaurants } from "../entities/restaurants/restaurants.entity";
+import { Repository } from "typeorm";
+import { IParamAddFoods } from "../types/fooditem";
 
 export const insertFoods = async ()  =>{
 
-  const foodItemRepository = AppDataSource.getRepository(FoodItem)
+  const foodItemRepository: Repository<FoodItem> = AppDataSource.getRepository(FoodItem)
 
   foodItem.map(async (data)=>{
    const foodItems = new FoodItem()
@@ -24,13 +24,13 @@ export const insertFoods = async ()  =>{
   })
 }
 
-export const addFoods = async (bodyData : any): Promise<IResponse> => {
+export const addFoods = async (bodyData : IParamAddFoods): Promise<IResponse> => {
   try {
-    let param = bodyData
+    let param: IParamAddFoods = bodyData
     // param.image = CreateFileObj(req)
-    param.image = {}
+    param.image = JSON.stringify(param.image)
 
-    const fooditem = new FoodItem()
+    const fooditem: FoodItem = new FoodItem()
     fooditem.name = param.name;
     fooditem.image = param.image;
     fooditem.price = param.price;
@@ -46,20 +46,18 @@ export const addFoods = async (bodyData : any): Promise<IResponse> => {
     console.log(e)
     return Error(e.message)
   }
-
 }
 
 export const fetchAllFoods = async () : Promise<IResponse> => {
 
   try {
-    const allFoods= await AppDataSource
+    const allFoods: FoodItem[] = await AppDataSource
       .getRepository(FoodItem)
       .createQueryBuilder("fooditem")
       .select("fooditem")
       .leftJoin("fooditem.category","category")
       .getMany()
 
-      console.log('alll foooddsss---------------',allFoods)
       if(!allFoods)
             return Error('No FoodItem Found!', [], 404)
         else
@@ -73,7 +71,7 @@ export const fetchAllFoods = async () : Promise<IResponse> => {
 
 export const categoryWiseFoods = async(req:Request):Promise<IResponse> =>{
   try {
-    const fooditem = await AppDataSource
+    const fooditem: FoodItem[] = await AppDataSource
       .createQueryBuilder()
       .select(["fooditem"])
       .from(FoodItem, "fooditem")
@@ -96,7 +94,7 @@ export const categoryWiseFoods = async(req:Request):Promise<IResponse> =>{
 export const findFoodItemById = async (id: string): Promise<IResponse> => {
 
   try {
-    const fooditem = await AppDataSource
+    const fooditem: FoodItem = await AppDataSource
       .createQueryBuilder()
       .select("fooditem")
       .from(FoodItem, "fooditem")
