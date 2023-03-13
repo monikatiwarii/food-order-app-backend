@@ -3,6 +3,7 @@ import { Category } from "../entities/restaurants/category.entity";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 import { IResponse } from "../types/restResponse";
+import { IAddCategoryData } from "../types/category";
 // import { category } from "../data/data";
 // import { Repository } from "typeorm/repository/Repository";
 
@@ -18,10 +19,10 @@ import { IResponse } from "../types/restResponse";
 //     })
 // }
 
-export const addCategory = async(bodyData : any) : Promise<IResponse> =>{
+export const addCategory = async(bodyData : IAddCategoryData) : Promise<IResponse> =>{
 
     try{
-        let param = bodyData
+        let param: IAddCategoryData = bodyData
         
         const findCategory: Category = await AppDataSource
         .createQueryBuilder()
@@ -35,7 +36,6 @@ export const addCategory = async(bodyData : any) : Promise<IResponse> =>{
         }
         else{
             const category: Category = new Category()
-    
             category.name = param.name;
             
             await Category.save(category)
