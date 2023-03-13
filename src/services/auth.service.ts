@@ -4,14 +4,14 @@ import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 import jwt from "jsonwebtoken";
 import { IResponse } from "../types/restResponse";
-import { userDataType, } from "../types/login.type";
 import { userType } from "../types/user.type";
+import { IUserData } from "../types/auth";
 const jwtKey = "food_order_key"//process.env.JWT_SECRET_KEY;
 
 export const loginService = async (userCredential : userType ) : Promise<IResponse> => {
     
     try {
-        const userData = await AppDataSource
+        const userData: IUserData = await AppDataSource
             .getRepository(User)
             .findOne({
                 where: {
@@ -20,7 +20,7 @@ export const loginService = async (userCredential : userType ) : Promise<IRespon
                 }
             })
         if (!!userData) {
-            let token  = jwt.sign(
+            let token: string = jwt.sign(
                 {
                     user_id : userData['id']
                 }, 
