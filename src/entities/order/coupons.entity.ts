@@ -1,5 +1,10 @@
 import  {Entity,BaseEntity,Column,PrimaryGeneratedColumn } from 'typeorm'
-import { ECouponTypes } from '../../types/coupons.type';
+// import { ECouponTypes } from '../../types/coupons.d';
+
+export enum ECouponTypes {
+    "PERCENTAGE"= "PERCENTAGE",
+    "FLAT"= "FLAT"
+  }
 
 @Entity('coupons')
 

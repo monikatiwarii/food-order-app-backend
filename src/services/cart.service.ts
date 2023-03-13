@@ -1,5 +1,5 @@
 import { Cart } from "../entities/cart/Cart.entity";
-import { IRespObj, IResponse } from "../types/response.type";
+import { IRespObj, IResponse } from "../types/restResponse";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 

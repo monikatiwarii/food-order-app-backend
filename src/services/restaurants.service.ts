@@ -5,7 +5,7 @@ import { Request, Response } from "express"
 import { Category } from "../entities/restaurants/category.entity"
 import { categoryType } from "../types/category.type"
 import { CreateFileObj } from "../controllers/common.controller"
-import { IResponse } from "../types/response.type"
+import { IResponse } from "../types/restResponse"
 import { restaurants } from "../data/data"
 
 

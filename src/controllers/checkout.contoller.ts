@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IResponse } from "../types/response.type";
+import { IResponse } from "../types/restResponse";
 import { checkOut as C } from "../services/checkout.service";
 
 export const checkOut = async (req: Request, res: Response) => {    

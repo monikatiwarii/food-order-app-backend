@@ -1,7 +1,7 @@
 import { foodList } from "../entities/foods/foodList.entity"
 import { RestaurantDescription } from "../entities/restaurants/restaurantDescription.entity"
 import { foodListType } from "../types/foodList.type"
-import { IResponse } from "../types/response.type"
+import { IResponse } from "../types/restResponse"
 import { restaurantDescriptionType } from "../types/restaurantDescription.type"
 import { AppDataSource } from "../utils/data-source"
 import { Error, Success } from "../utils/restResponse"

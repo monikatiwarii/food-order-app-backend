@@ -1,9 +1,9 @@
 import { AppDataSource } from "../utils/data-source"
 import { Success, Error } from "../utils/restResponse"
 import { Request, Response } from "express"
-import { IRespObj, IResponse } from "../types/response.type"
+import { IRespObj, IResponse } from "../types/restResponse"
 import { Coupons } from "../entities/order/coupons.entity"
-import { ECouponTypes, IFindCouponFnRetValType, IParamCoupon } from "../types/coupons.type"
+import { ECouponTypes, IFindCouponFnRetValType, IParamCoupon } from "../types/coupons"
 
 export const addCoupon = async (req: Request): Promise<IResponse> => {
   try {

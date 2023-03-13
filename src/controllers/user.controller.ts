@@ -1,6 +1,6 @@
 import { fetchAllUser,addUser, deleteUser, findUserById} from "../services/user.service";
 import { Request,Response } from "express";
-import { IResponse } from "../types/response.type";
+import { IResponse } from "../types/restResponse";
 
 
 export const addUsers = async(req:Request,res:Response)=>{

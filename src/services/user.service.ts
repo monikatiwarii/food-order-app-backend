@@ -1,7 +1,7 @@
 import {User} from '../entities/user/User.entity'
 import { AppDataSource } from '../utils/data-source'
 import { Request,Response } from 'express'
-import { IResponse } from '../types/response.type'
+import { IResponse } from '../types/restResponse'
 import { Error, Success } from '../utils/restResponse'
 
 

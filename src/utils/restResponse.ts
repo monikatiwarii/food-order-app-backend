@@ -8,7 +8,7 @@ import { StringMappingType } from "typescript";
 //   error: []
 // }
 
-import { IDataGet, IResponse } from "../types/response.type";
+import { IDataGet, IResponse } from "../types/restResponse";
 
 export const Success  = (msg: string, dataGet: IDataGet = []) : IResponse => {
   let data: IResponse = {

@@ -3,7 +3,7 @@ import { Category } from "../entities/restaurants/category.entity";
 import { categoryType } from "../types/category.type";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
-import { IResponse } from "../types/response.type";
+import { IResponse } from "../types/restResponse";
 import { category } from "../data/data";
 
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IResponse } from "../types/response.type";
+import { IResponse } from "../types/restResponse";
 import { addCoupon as AC, updateCoupon as UC, fetchCouponData as FCD } from "../services/coupon.service";
 
 export const addCoupon = async (req: Request, res: Response) => {    

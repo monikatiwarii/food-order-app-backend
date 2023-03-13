@@ -1,5 +1,5 @@
 import { categoryType } from '../types/category.type';
-import { CouponType } from '../types/coupons.type';
+import { CouponType } from '../types/coupons';
 import { foodCollectionImagesType } from '../types/foodCollection.type';
 import { foodItemType } from '../types/foodItem.type';
 import { foodListType } from '../types/foodList.type';

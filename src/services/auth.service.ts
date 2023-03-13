@@ -3,7 +3,7 @@ import { User } from "../entities/user/User.entity";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 import jwt from "jsonwebtoken";
-import { IResponse } from "../types/response.type";
+import { IResponse } from "../types/restResponse";
 import { userDataType, } from "../types/login.type";
 import { userType } from "../types/user.type";
 const jwtKey = "food_order_key"//process.env.JWT_SECRET_KEY;

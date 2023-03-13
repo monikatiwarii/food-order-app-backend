@@ -1,7 +1,7 @@
 import {fetchAllFoods,findFoodItemById, addFoods, insertFoods, categoryWiseFoods, findFoodItemByName} from '../services/fooditem.service'
 import { Request,Response } from "express"
 import { foodItemType } from '../types/foodItem.type'
-import { IResponse } from '../types/response.type'
+import { IResponse } from '../types/restResponse'
 
 export const insertFoodItems = async(req : Request,res : Response) =>{
 console.log('in 1 :: :: :: :: :: ')

@@ -1,8 +1,8 @@
 import { Cart } from "../entities/cart/Cart.entity";
 import { Order } from "../entities/order/Order.entity";
 import { OrderDetails } from "../entities/order/OrderDetails.entity";
-import { IFindCouponFnRetValType } from "../types/coupons.type";
-import { IResponse } from "../types/response.type";
+import { IFindCouponFnRetValType } from "../types/coupons";
+import { IResponse } from "../types/restResponse";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
 import { findSumOfCartData, removeCartData } from "./cart.service";

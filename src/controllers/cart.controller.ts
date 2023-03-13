@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IResponse } from "../types/response.type";
+import { IResponse } from "../types/restResponse";
 import { updateCart as UC, fetchCartData as FC } from "../services/cart.service";
 
 export const updateCart = async (req: Request, res: Response) => {    

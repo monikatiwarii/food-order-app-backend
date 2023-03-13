@@ -1,7 +1,7 @@
 import {addCategory, fecthAllCategory,findCategoryById, getAllCategory} from '../services/category.service'
 import {Request,Response} from 'express'
 import { categoryType } from '../types/category.type' 
-import { IResponse } from '../types/response.type'
+import { IResponse } from '../types/restResponse'
 
 
 

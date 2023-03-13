@@ -3,7 +3,7 @@ import { foodItemType } from "../types/foodItem.type";
 import { foodItem } from "../data/data";
 import { AppDataSource } from "../utils/data-source";
 import { Request, Response } from "express";
-import { IResponse } from "../types/response.type";
+import { IResponse } from "../types/restResponse";
 import { Error, Success } from "../utils/restResponse";
 import { Category } from "../entities/restaurants/category.entity";
 import { CreateFileObj } from "../controllers/common.controller";

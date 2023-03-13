@@ -1,5 +1,5 @@
 import { SelectedCategory } from "../entities/restaurants/selectedCategory.entity"
-import { IResponse } from "../types/response.type"
+import { IResponse } from "../types/restResponse"
 import { AppDataSource } from "../utils/data-source"
 import { Error, Success } from "../utils/restResponse"
 

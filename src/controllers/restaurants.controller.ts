@@ -1,7 +1,7 @@
 import  {addRestaurant,fetchAllRestaurants, findRestaurantsById, getAllRestaurants, slugWiseRestaurant, updateRestaurant} from '../services/restaurants.service'
 import { Request,Response } from 'express'
 import { restaurantType } from '../types/restaurant.type'
-import { IResponse } from '../types/response.type'
+import { IResponse } from '../types/restResponse'
 import { restaurants } from '../data/data'
 import { AppDataSource } from '../utils/data-source'
 import { Restaurants } from '../entities/restaurants/restaurants.entity'
