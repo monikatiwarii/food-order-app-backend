@@ -4,8 +4,6 @@ import { AppDataSource } from "../utils/data-source";
 import { Request} from "express";
 import { IResponse } from "../types/restResponse";
 import { Error, Success } from "../utils/restResponse";
-import { Category } from "../entities/restaurants/category.entity";
-import { Restaurants } from "../entities/restaurants/restaurants.entity";
 import { Repository } from "typeorm";
 import { IParamAddFoods } from "../types/fooditem";
 
@@ -94,6 +92,7 @@ export const categoryWiseFoods = async(req:Request):Promise<IResponse> =>{
 export const findFoodItemById = async (id: string): Promise<IResponse> => {
 
   try {
+
     const fooditem: FoodItem = await AppDataSource
       .createQueryBuilder()
       .select("fooditem")
@@ -117,12 +116,14 @@ export const findFoodItemById = async (id: string): Promise<IResponse> => {
 export const findFoodItemByName = async (name: string): Promise<IResponse> => {
 
   try {
+
     const fooditem = await AppDataSource
       .createQueryBuilder()
       .select("fooditem")
       .from(FoodItem, "fooditem")
-      .where("fooditem.id = :id", { name: name })
-      .getOne()
+      .leftJoinAndSelect("fooditem.category","category")
+      .where("category.name = :name", { name:name  })
+      .getMany()
 
       if(!fooditem) 
         return Error('No FoodItem Found!', [], 404)

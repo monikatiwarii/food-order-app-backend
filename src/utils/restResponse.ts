@@ -1,13 +1,5 @@
 import { StringMappingType } from "typescript";
 
-// interface Success {
-//   success: boolean,
-//   message: string,
-//   payload: any,
-//   code: number,
-//   error: []
-// }
-
 import { IDataGet, IResponse } from "../types/restResponse";
 
 export const Success  = (msg: string, dataGet: IDataGet = []) : IResponse => {
