@@ -6,6 +6,7 @@ import { IResponse } from "../types/restResponse";
 import { Error, Success } from "../utils/restResponse";
 import { Repository } from "typeorm";
 import { IParamAddFoods } from "../types/fooditem";
+import { CreateFileObj } from "../controllers/common.controller";
 
 export const insertFoods = async ()  =>{
 
@@ -22,11 +23,11 @@ export const insertFoods = async ()  =>{
   })
 }
 
-export const addFoods = async (bodyData : IParamAddFoods): Promise<IResponse> => {
+export const addFoods = async (req: Request): Promise<IResponse> => {
   try {
+    let bodyData : IParamAddFoods = req.body
+    
     let param: IParamAddFoods = bodyData
-    // param.image = CreateFileObj(req)
-    param.image = JSON.stringify(param.image)
 
     const fooditem: FoodItem = new FoodItem()
     fooditem.name = param.name;
@@ -38,7 +39,7 @@ export const addFoods = async (bodyData : IParamAddFoods): Promise<IResponse> =>
 
     await FoodItem.save(fooditem)
 
-    return Success('Food Item Added!', foodItem)
+    return Success('Food Item Added')
   }
   catch (e) {
     console.log(e)

@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
             file.originalname
         )}`;
 
-        // req.body[file.fieldname] = `/${folderName}/${fileName}`;
+        req.body[file.fieldname] = `/${folderName}/${fileName}`;
         cb(null,fileName)
     }
 })

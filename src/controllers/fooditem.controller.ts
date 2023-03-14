@@ -14,7 +14,7 @@ export const insertFoodItems = async(req : Request,res : Response) =>{
 
 export const addFoodsItem = async(req:Request,res:Response)=>{
     try{
-        const foodList: IResponse = await addFoods(req.body)
+        const foodList: IResponse = await addFoods(req)
         res.status(foodList.code).send(foodList)
     }
     catch(e){

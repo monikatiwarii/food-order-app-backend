@@ -5,14 +5,14 @@ import { AppDataSource } from "../utils/data-source"
 import { Error, Success } from "../utils/restResponse"
 
 export const fetchSelectedCategory = async() : Promise<IResponse> =>{
-    try{
-        const category: SelectedCategory[] = await AppDataSource
+    try{   
+     const category: SelectedCategory[] = await AppDataSource
             .getRepository(SelectedCategory)
             .createQueryBuilder("selCategory")
             .select("selCategory")
             .orderBy("selCategory.id","ASC")
             .getMany()
-
+        
         if(!category)
             return Error('No category  Found!', [], 404)
         else
