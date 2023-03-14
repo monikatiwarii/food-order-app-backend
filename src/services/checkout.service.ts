@@ -45,7 +45,7 @@ export const checkOut = async (req) : Promise<IResponse> =>  {
             .execute()
         let orderId: number = OrderData.raw[0].id
 
-        let orderDetailArr: any = cartData.map(val => {
+        let orderDetailArr: any[] = cartData.map(val => {
             return {
                 order: orderId,
                 fooditem: val.fooditem.id,
@@ -53,12 +53,12 @@ export const checkOut = async (req) : Promise<IResponse> =>  {
             }
         })
 
-        let orderDetailsData = OrderDetails.create(orderDetailArr)
+        let orderDetailsData: OrderDetails[] = OrderDetails.create(orderDetailArr)
 
         await OrderDetails.save(orderDetailsData)
 
         await removeCartData(userId)
-
+        
         return Success('Order Placed Successfully!')
     } catch (e) {
         console.log(e)

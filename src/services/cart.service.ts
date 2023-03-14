@@ -1,5 +1,5 @@
 import { Cart } from "../entities/cart/Cart.entity";
-import { IAddToCart, ICartRetUpdatedValueType, IFetchCartDataType, IFindCartDataType } from "../types/cart";
+import { IAddToCart, ICartData, ICartRetUpdatedValueType, IFetchCartDataType, IFindCartDataType } from "../types/cart";
 import { IResponse } from "../types/restResponse";
 import { AppDataSource } from "../utils/data-source";
 import { Error, Success } from "../utils/restResponse";
@@ -18,7 +18,7 @@ export const updateCart = async (req:any) : Promise<IResponse>=> {
                 quantity: 1,
                 fooditem: foodItemId,
                 user: userId
-            }   
+            }
             const returnUpdatedValues = await AppDataSource
                 .createQueryBuilder()
                 .insert()
@@ -26,7 +26,7 @@ export const updateCart = async (req:any) : Promise<IResponse>=> {
                 .values(CartDataValue)
                 .returning('*')
                 .execute()
-
+            
             returnUpdatedValue = returnUpdatedValues.raw
 
         } else {

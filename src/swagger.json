@@ -2,8 +2,8 @@
     "openapi": "3.0.0",
     "info": {
         "version": "1.0.0",
-        "title": "livelyt-be-test",
-        "description": "A simple Cute website",
+        "title": "Food Order App",
+        "description": "A simple website",
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
@@ -305,7 +305,80 @@
                     }
                 }
             }
-        }
+        },
+        "/user": {
+            "get": {
+                "tags": ["User"],
+                "summary": "To get all user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["User"],
+                "summary": "To Create user",
+                "requestBody": {
+                    "description": "Create User",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/createUSer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "tags": ["User"],
+                "summary": "To get Individual user Data",
+                "parameters":[
+                        {
+                            "in": "path",
+                            "name": "id",
+                            "description": "User Id",
+                            "required": true,
+                            "schema": {
+                                "type": "number"
+                            }
+                        }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["User"],
+                "summary": "To delete user Data",
+                "parameters":[
+                        {
+                            "in": "path",
+                            "name": "id",
+                            "description": "User Id",
+                            "required": true,
+                            "schema": {
+                                "type": "number"
+                            }
+                        }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }       
     },
     "definitions": {
         "createCategory": {
@@ -446,6 +519,19 @@
                         "PERCENTAGE": "PERCENTAGE",
                         "FLAT": "FLAT"
                     },
+                    "required": true
+                }
+            }
+        },
+        "createUser": {
+            "type": "object",
+            "properties": {
+                "email":{
+                    "type": "string",
+                    "required": true
+                },
+                "password":{
+                    "type": "string",
                     "required": true
                 }
             }
