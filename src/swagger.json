@@ -378,7 +378,30 @@
                     }
                 }
             }
-        }       
+        } ,
+        "/checkout":{
+            "post": {
+                "tags": ["Checkout"],
+                "summary": "To Checkout order",
+                "requestBody": {
+                    "description": "Checkout",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/checkout"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }  
+        }
+           
     },
     "definitions": {
         "createCategory": {
@@ -531,6 +554,19 @@
                     "required": true
                 },
                 "password":{
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "checkout": {
+            "type": "object",
+            "properties": {
+                "total":{
+                    "type": "number",
+                    "required": true
+                },
+                "coupon":{
                     "type": "string",
                     "required": true
                 }
